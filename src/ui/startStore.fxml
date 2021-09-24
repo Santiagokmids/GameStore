@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="715.0" style="-fx-background-color: #38A793;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="468.0" fitWidth="715.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Downloads/fONDO.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="389.0" fitWidth="715.0" layoutX="12.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Downloads/Título%20(1).png" />
+         </image>
+      </ImageView>
+      <Label layoutX="138.0" layoutY="381.0" text="* Presione select para agregar los parámetro con los que va a realizar la simulación" />
+      <Label layoutX="239.0" layoutY="404.0" text="* Presione start para iniciar con la simulación" />
+   </children>
+</Pane>
