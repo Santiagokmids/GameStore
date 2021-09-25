@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 
 public class GameStoreGUI {
@@ -38,6 +39,19 @@ public class GameStoreGUI {
 
 	@FXML
 	private ImageView startButton;
+	
+	@FXML
+    private ImageView shortBackground;
+
+    @FXML
+    private ImageView shortTitle;
+
+    @FXML
+    private ImageView shortMen;
+
+    @FXML
+    private ImageView shortWoman;
+
 
 	@FXML
 	void numSimulsContinue(ActionEvent event) {
@@ -63,7 +77,7 @@ public class GameStoreGUI {
 	@FXML
 	public void loadApp() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("startStore.fxml"));
-		
+
 		loader.setController(this);
 		Parent load = loader.load();
 		mainPane.getChildren().clear();
@@ -76,19 +90,33 @@ public class GameStoreGUI {
 	}
 
 	@FXML
-	public void loadSimuls() throws IOException {
-		mainPane.setPrefWidth(400);
+	public void loadSimuls(MouseEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("num-Simuls.fxml"));
 
 		loader.setController(this);
 		Parent load = loader.load();
 		mainPane.getChildren().clear();
-		
+
 		Image image = new Image("/images/background.png");
 		numSimulsBackground.setImage(image);
 		Image image1 = new Image("/images/numDates.png");
 		numSimulsTitle.setImage(image1);
 		mainPane.setTop(load);
 
+	}
+
+	@FXML
+	public void startSimul(MouseEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("short.fxml"));
+
+		loader.setController(this);
+		Parent load = loader.load();
+		mainPane.getChildren().clear();
+
+		Image image = new Image("/images/background.png");
+		.setImage(image);
+		Image image1 = new Image("/images/numDates.png");
+		numSimulsTitle.setImage(image1);
+		mainPane.setTop(load);
 	}
 }

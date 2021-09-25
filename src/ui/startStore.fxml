@@ -11,6 +11,6 @@
       <Label layoutX="136.0" layoutY="354.0" text="* Presione select para agregar los parámetros con los que va a realizar la simulación" />
       <Label layoutX="239.0" layoutY="373.0" text="* Presione start para iniciar con la simulación" />
       <ImageView fx:id="selectButton" fitHeight="17.0" fitWidth="51.0" layoutX="273.0" layoutY="272.0" onMouseClicked="#loadSimuls" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="startButton" fitHeight="17.0" fitWidth="51.0" layoutX="344.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="startButton" fitHeight="17.0" fitWidth="51.0" layoutX="344.0" layoutY="272.0" onMouseClicked="#startSimul" pickOnBounds="true" preserveRatio="true" />
    </children>
 </Pane>
