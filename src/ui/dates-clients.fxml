@@ -15,7 +15,7 @@
             <Image url="@../../../../Downloads/FOndosss.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="426.0" fitWidth="1054.0" layoutX="-22.0" layoutY="-108.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgDatesClients" fitHeight="426.0" fitWidth="1054.0" layoutX="-22.0" layoutY="-108.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../Downloads/datosClients.png" />
          </image>
@@ -25,7 +25,7 @@
             <Font name="Gill Sans MT Ext Condensed Bold" size="36.0" />
          </font>
       </Label>
-      <TextField alignment="CENTER" layoutX="279.0" layoutY="201.0" prefHeight="32.0" prefWidth="159.0" promptText="Cédula">
+      <TextField fx:id="txtIdClients" alignment="CENTER" layoutX="279.0" layoutY="201.0" prefHeight="32.0" prefWidth="159.0" promptText="Cédula">
          <font>
             <Font name="Franklin Gothic Demi Cond" size="17.0" />
          </font>
@@ -35,7 +35,7 @@
             <Font name="Gill Sans MT Ext Condensed Bold" size="36.0" />
          </font>
       </Label>
-      <TextField alignment="CENTER" layoutX="183.0" layoutY="287.0" prefHeight="32.0" prefWidth="348.0" promptText="Ej: 356;581;846">
+      <TextField fx:id="txtCodesGamesClients" alignment="CENTER" layoutX="183.0" layoutY="287.0" prefHeight="32.0" prefWidth="348.0" promptText="Ej: 356;581;846">
          <font>
             <Font name="Franklin Gothic Demi Cond" size="17.0" />
          </font>
