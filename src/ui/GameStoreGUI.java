@@ -125,6 +125,7 @@ public class GameStoreGUI {
 	@FXML
 	private ProgressIndicator shortProgreesInd;
 
+    
 	@FXML
 	void addCustomer(ActionEvent event) throws IOException {
 		int idClients = 0;
@@ -168,8 +169,7 @@ public class GameStoreGUI {
 				if (numClient > 0) {
 
 					// se carga para llenar datos de los clientes
-
-					FXMLLoader loader = new FXMLLoader(getClass().getResource("date-clients.fxml"));
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("dates-clients.fxml"));
 					loader.setController(this);
 					Parent load = loader.load();
 					mainPane.getChildren().clear();
