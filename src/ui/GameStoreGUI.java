@@ -31,11 +31,17 @@ public class GameStoreGUI {
 				JOptionPane.showMessageDialog(null, "Debe llenar los datos solicitados", "Error",
 						JOptionPane.WARNING_MESSAGE);
 			}else {
-				numSimul= Integer.parseInt(numSimulsNum.getText());
-				if(numSimul < 1) {
-					JOptionPane.showMessageDialog(null, "La simulacion debe tener una o mas repeticiones", "Error",
+				try {
+					numSimul= Integer.parseInt(numSimulsNum.getText());
+					if(numSimul < 1) {
+						JOptionPane.showMessageDialog(null, "La simulacion debe tener una o mas repeticiones", "Error",
+								JOptionPane.WARNING_MESSAGE);
+					}
+				} catch (NumberFormatException nfe) {
+					JOptionPane.showMessageDialog(null, "Debe ser un numero", "Error",
 							JOptionPane.WARNING_MESSAGE);
 				}
+				
 			}
 	    }
 
