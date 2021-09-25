@@ -93,6 +93,8 @@ public class GameStoreGUI {
     	if (numDatesStand.getText().equals("")||numDatesCashiers.getText().equals("") ) {
 			JOptionPane.showMessageDialog(null, "Debe llenar los datos solicitados", "Error",
 					JOptionPane.WARNING_MESSAGE);
+			numDatesStand.setText("");
+			numDatesCashiers.setText("");
 		}else {
 			try {
 				numCashiers= Integer.parseInt(numDatesCashiers.getText());
@@ -100,19 +102,24 @@ public class GameStoreGUI {
 				if(numCashiers < 1 || numStand< 1) {
 					JOptionPane.showMessageDialog(null, "Los datos deben ser mayor a 0", "Error",
 							JOptionPane.WARNING_MESSAGE);
+					numDatesStand.setText("");
+					numDatesCashiers.setText("");
 				}else {
 						
-					// se piden datos de los stands 
-					
-					
-					
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("stands.fxml"));			
 					loader.setController(this);
 					Parent load = loader.load();
 					mainPane.getChildren().clear();
+					
+					Image image = new Image("/images/background.png");
+					standsBackground.setImage(image);
+					Image image1 = new Image("/images/infoStands.png");
+					standsTitle.setImage(image1);
 					mainPane.setTop(load);
 				}
 			} catch (NumberFormatException nfe) {
+				numDatesStand.setText("");
+				numDatesCashiers.setText("");
 				JOptionPane.showMessageDialog(null, "Debe ser un numero", "Error",
 						JOptionPane.WARNING_MESSAGE);
 			}
@@ -125,30 +132,32 @@ public class GameStoreGUI {
 		if (numSimulsNum.getText().equals("") ) {
 			JOptionPane.showMessageDialog(null, "Debe llenar los datos solicitados", "Error",
 					JOptionPane.WARNING_MESSAGE);
+			numSimulsNum.setText("");
 		}else {
 			try {
 				numSimul= Integer.parseInt(numSimulsNum.getText());
 				if(numSimul < 1) {
 					JOptionPane.showMessageDialog(null, "La simulacion debe tener una o mas repeticiones", "Error",
 							JOptionPane.WARNING_MESSAGE);
+					numSimulsNum.setText("");
 				}else {
-					
-					
-					
-					
-					// se piden los  datos para la simulacion 
-					
-					
 					
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("dates-simuls.fxml"));			
 					loader.setController(this);
 					Parent load = loader.load();
 					mainPane.getChildren().clear();
+
+					Image image = new Image("/images/background.png");
+					imageDatesBackground.setImage(image);
+					Image image1 = new Image("/images/datesSimul.png");
+					imageDateTitle.setImage(image1);
+					
 					mainPane.setTop(load);
 				}
 			} catch (NumberFormatException nfe) {
 				JOptionPane.showMessageDialog(null, "Debe ser un numero", "Error",
 						JOptionPane.WARNING_MESSAGE);
+				numSimulsNum.setText("");
 			}
 
 		}
@@ -194,7 +203,7 @@ public class GameStoreGUI {
 		mainPane.getChildren().clear();
 
 		Image image = new Image("/images/background.png");
-		.setImage(image);
+		shortBackground.setImage(image);
 		Image image1 = new Image("/images/numDates.png");
 		numSimulsTitle.setImage(image1);
 		mainPane.setTop(load);
