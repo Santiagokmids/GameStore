@@ -40,7 +40,7 @@
             <Font name="Franklin Gothic Demi Cond" size="17.0" />
          </font>
       </TextField>
-      <Button fx:id="addGame" layoutX="245.0" layoutY="276.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="224.0" style="-fx-background-color: black; -fx-background-radius: 15;" text="AGREGAR JUEGO" textFill="WHITE">
+      <Button layoutX="245.0" layoutY="276.0" mnemonicParsing="false" onAction="#addGame" prefHeight="40.0" prefWidth="224.0" style="-fx-background-color: black; -fx-background-radius: 15;" text="AGREGAR JUEGO" textFill="WHITE">
          <font>
             <Font name="Century" size="19.0" />
          </font>
