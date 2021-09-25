@@ -6,24 +6,24 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="426.0" prefWidth="751.0" style="-fx-background-color: #38A793;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="426.0" prefWidth="751.0" style="-fx-background-color: #38A793;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="421.0" fitWidth="830.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="payingBackgroud" fitHeight="421.0" fitWidth="830.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../Downloads/FOndosss.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="407.0" fitWidth="684.0" layoutX="26.0" layoutY="-117.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="payingTitle" fitHeight="407.0" fitWidth="684.0" layoutX="26.0" layoutY="-117.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../Downloads/Pay.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="206.0" fitWidth="712.0" layoutX="-24.0" layoutY="182.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="payingCashier" fitHeight="206.0" fitWidth="712.0" layoutX="-24.0" layoutY="182.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../Downloads/Cajero.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="339.0" fitWidth="605.0" layoutX="224.0" layoutY="127.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="payingQueue" fitHeight="339.0" fitWidth="605.0" layoutX="224.0" layoutY="127.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../Downloads/Qeue.png" />
          </image>
@@ -38,12 +38,12 @@
             <Font name="Britannic Bold" size="20.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="54.0" layoutY="183.0" prefHeight="22.0" prefWidth="267.0" text="1">
+      <Label fx:id="payingLabelNumCashier" alignment="CENTER" layoutX="54.0" layoutY="183.0" prefHeight="22.0" prefWidth="267.0" text="1">
          <font>
             <Font name="Britannic Bold" size="20.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="392.0" layoutY="183.0" prefHeight="22.0" prefWidth="267.0" text="1">
+      <Label fx:id="payingNumPeople" alignment="CENTER" layoutX="392.0" layoutY="183.0" prefHeight="22.0" prefWidth="267.0" text="1">
          <font>
             <Font name="Britannic Bold" size="20.0" />
          </font>

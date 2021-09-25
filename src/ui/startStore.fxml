@@ -5,14 +5,14 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="715.0" style="-fx-background-color: #38A793;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="715.0" style="-fx-background-color: #38A793;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="468.0" fitWidth="715.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="starStoreBackground" fitHeight="468.0" fitWidth="715.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../Downloads/fONDO.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="389.0" fitWidth="715.0" layoutX="12.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="startStoreTitle" fitHeight="389.0" fitWidth="715.0" layoutX="12.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../Downloads/Título%20(1).png" />
          </image>

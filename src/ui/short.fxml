@@ -8,24 +8,24 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="714.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="714.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="450.0" fitWidth="714.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="shortBackground" fitHeight="450.0" fitWidth="714.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../Downloads/FOndosss.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="420.0" fitWidth="756.0" layoutX="-16.0" layoutY="-104.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="shortTitle" fitHeight="420.0" fitWidth="756.0" layoutX="-16.0" layoutY="-104.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../Downloads/ordena.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="159.0" fitWidth="160.0" layoutX="152.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="shortMen" fitHeight="159.0" fitWidth="160.0" layoutX="152.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../Downloads/men.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="159.0" fitWidth="159.0" layoutX="379.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="shortWoman" fitHeight="159.0" fitWidth="159.0" layoutX="379.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../Downloads/women.png" />
          </image>
@@ -35,7 +35,7 @@
             <Font name="Book Antiqua" size="18.0" />
          </font>
       </Label>
-      <ProgressIndicator layoutX="334.0" layoutY="291.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0" prefWidth="45.0" progress="0.71">
+      <ProgressIndicator fx:id="shortProgreesInd" layoutX="334.0" layoutY="291.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0" prefWidth="45.0" progress="0.71">
          <cursor>
             <Cursor fx:constant="WAIT" />
          </cursor>
