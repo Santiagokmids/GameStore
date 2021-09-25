@@ -85,9 +85,8 @@ public class GameStoreGUI {
 
     }
 
-
     @FXML
-    void addDatesSimuls(ActionEvent event) throws IOException {
+    public void addDatesSimuls(ActionEvent event) throws IOException {
     	int numCashiers = 0;
     	int  numStand = 0;
     	if (numDatesStand.getText().equals("")||numDatesCashiers.getText().equals("") ) {
@@ -126,8 +125,9 @@ public class GameStoreGUI {
 
 		}
     }
+    
 	@FXML
-	void numSimulsContinue(ActionEvent event) throws IOException {
+	public void numSimulsContinue(ActionEvent event) throws IOException {
 		int numSimul =0;
 		if (numSimulsNum.getText().equals("") ) {
 			JOptionPane.showMessageDialog(null, "Debe llenar los datos solicitados", "Error",
@@ -204,8 +204,8 @@ public class GameStoreGUI {
 
 		Image image = new Image("/images/background.png");
 		shortBackground.setImage(image);
-		Image image1 = new Image("/images/numDates.png");
-		numSimulsTitle.setImage(image1);
+		Image image1 = new Image("/images/short.png");
+		shortTitle.setImage(image1);
 		mainPane.setTop(load);
 	}
 }
