@@ -80,9 +80,64 @@ public class GameStoreGUI {
     @FXML
     private Label standsLabelNumStands;
 
+    
     @FXML
-    void standsAddStands(ActionEvent event) {
+    private ImageView gameBackground;
 
+    @FXML
+    private ImageView gameTitle;
+
+    @FXML
+    private TextField codeGame;
+
+    @FXML
+    private TextField priceGame;
+
+    @FXML
+    private Label numGame;
+
+    @FXML
+    private TextField unitsGame;
+
+    @FXML
+    void addGame(ActionEvent event) {
+
+    }
+    @FXML
+    void standsAddStands(ActionEvent event) throws IOException {
+    	int  numGame = 0;
+    	if (standsNumGames.getText().equals("")||standsName.getText().equals("") ) {
+			JOptionPane.showMessageDialog(null, "Debe llenar los datos solicitados", "Error",
+					JOptionPane.WARNING_MESSAGE);
+			standsNumGames.setText("");
+			standsName.setText("");
+		}else {
+			try {
+				numGame= Integer.parseInt(standsNumGames.getText());
+				if( numGame< 1) {
+					JOptionPane.showMessageDialog(null, "Los datos deben ser mayor a 0", "Error",
+							JOptionPane.WARNING_MESSAGE);
+					standsNumGames.setText("");
+					standsName.setText("");
+				}else {
+						
+					
+					//cargamos donde se piden los valores de los juegos 
+					
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("games.fxml"));			
+					loader.setController(this);
+					Parent load = loader.load();
+					mainPane.getChildren().clear();
+					mainPane.setTop(load);
+				}
+			} catch (NumberFormatException nfe) {
+				standsNumGames.setText("");
+				standsName.setText("");
+				JOptionPane.showMessageDialog(null, "Debe ser un numero", "Error",
+						JOptionPane.WARNING_MESSAGE);
+			}
+
+		}
     }
 
     @FXML
