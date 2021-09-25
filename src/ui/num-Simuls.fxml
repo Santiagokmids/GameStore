@@ -24,7 +24,7 @@
             <Font name="Berlin Sans FB Demi Bold" size="14.0" />
          </font>
       </TextField>
-      <Button fx:id="numSimulsContinue" layoutX="314.0" layoutY="284.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="121.0" style="-fx-background-color: black; -fx-background-radius: 15;" text="Continuar" textFill="WHITE">
+      <Button layoutX="314.0" layoutY="284.0" mnemonicParsing="false" onAction="#numSimulsContinue" prefHeight="40.0" prefWidth="121.0" style="-fx-background-color: black; -fx-background-radius: 15;" text="Continuar" textFill="WHITE">
          <font>
             <Font name="Century" size="19.0" />
          </font>
