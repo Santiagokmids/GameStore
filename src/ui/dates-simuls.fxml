@@ -40,7 +40,7 @@
             <Font name="Franklin Gothic Demi Cond" size="17.0" />
          </font>
       </TextField>
-      <Button fx:id="addDatesSimuls" layoutX="275.0" layoutY="276.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="159.0" style="-fx-background-color: black; -fx-background-radius: 15;" text="AGREGAR" textFill="WHITE">
+      <Button layoutX="275.0" layoutY="276.0" mnemonicParsing="false" onAction="#addDatesSimuls" prefHeight="40.0" prefWidth="159.0" style="-fx-background-color: black; -fx-background-radius: 15;" text="AGREGAR" textFill="WHITE">
          <font>
             <Font name="Century" size="19.0" />
          </font>
