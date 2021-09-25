@@ -80,7 +80,6 @@ public class GameStoreGUI {
     @FXML
     private Label standsLabelNumStands;
 
-    
     @FXML
     private ImageView gameBackground;
 
@@ -104,7 +103,7 @@ public class GameStoreGUI {
 
     }
     @FXML
-    void standsAddStands(ActionEvent event) throws IOException {
+    public void standsAddStands(ActionEvent event) throws IOException {
     	int  numGame = 0;
     	if (standsNumGames.getText().equals("")||standsName.getText().equals("") ) {
 			JOptionPane.showMessageDialog(null, "Debe llenar los datos solicitados", "Error",
@@ -120,14 +119,17 @@ public class GameStoreGUI {
 					standsNumGames.setText("");
 					standsName.setText("");
 				}else {
-						
-					
-					//cargamos donde se piden los valores de los juegos 
 					
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("games.fxml"));			
 					loader.setController(this);
 					Parent load = loader.load();
 					mainPane.getChildren().clear();
+					
+					Image image = new Image("/images/background.png");
+					gameBackground.setImage(image);
+					Image image1 = new Image("/images/games.png");
+					gameTitle.setImage(image1);
+					mainPane.setTop(load);
 					mainPane.setTop(load);
 				}
 			} catch (NumberFormatException nfe) {
