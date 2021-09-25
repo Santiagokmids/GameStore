@@ -26,12 +26,13 @@ public class GameStoreGUI {
 
 	    @FXML
 	    void numSimulsContinue(ActionEvent event) {
-	    	int numSimul = Integer.parseInt(numSimulsNum.getText());
+	    	int numSimul =0;
 	    	if (numSimulsNum.getText().equals("") ) {
 				JOptionPane.showMessageDialog(null, "Debe llenar los datos solicitados", "Error",
 						JOptionPane.WARNING_MESSAGE);
 			}else {
-				if(numSimul > 0) {
+				numSimul= Integer.parseInt(numSimulsNum.getText());
+				if(numSimul < 1) {
 					JOptionPane.showMessageDialog(null, "La simulacion debe tener una o mas repeticiones", "Error",
 							JOptionPane.WARNING_MESSAGE);
 				}
