@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="714.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="714.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="450.0" fitWidth="714.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imageClientBac" fitHeight="450.0" fitWidth="714.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../Downloads/FOndosss.png" />
          </image>
@@ -40,7 +40,7 @@
             <Font name="Franklin Gothic Demi Cond" size="17.0" />
          </font>
       </TextField>
-      <Button layoutX="216.0" layoutY="337.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="283.0" style="-fx-background-color: black; -fx-background-radius: 15;" text="AGREGAR CLIENTE" textFill="WHITE">
+      <Button layoutX="216.0" layoutY="337.0" mnemonicParsing="false" onAction="#addCustomer" prefHeight="40.0" prefWidth="283.0" style="-fx-background-color: black; -fx-background-radius: 15;" text="AGREGAR CLIENTE" textFill="WHITE">
          <font>
             <Font name="Century" size="19.0" />
          </font>
