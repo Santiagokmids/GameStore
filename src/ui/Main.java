@@ -31,6 +31,6 @@ public class Main extends Application{
 			primaryStage.setTitle("Aliens Invaders");
 			primaryStage.setResizable(false);
 			primaryStage.show();
-			gameStore.loadSimuls();
+			gameStore.loadApp();
 	}
 }

@@ -7,24 +7,24 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="425.0" prefWidth="749.0" style="-fx-background-color: #38A793;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="714.0" style="-fx-background-color: #38A793;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="numSimulsBackground" fitHeight="621.0" fitWidth="749.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../Downloads/FOndosss.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="numSimulsTitle" fitHeight="402.0" fitWidth="761.0" layoutX="17.0" layoutY="-70.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="numSimulsTitle" fitHeight="402.0" fitWidth="761.0" layoutY="-79.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../Downloads/_noDatos.png" />
+            <Image url="@../../../../Downloads/numDates.png" />
          </image>
       </ImageView>
-      <TextField fx:id="numSimulsNum" alignment="CENTER" layoutX="345.0" layoutY="211.0" prefHeight="47.0" prefWidth="59.0" promptText="#">
+      <TextField fx:id="numSimulsNum" alignment="CENTER" layoutX="328.0" layoutY="200.0" prefHeight="47.0" prefWidth="59.0" promptText="#">
          <font>
             <Font name="Berlin Sans FB Demi Bold" size="14.0" />
          </font>
       </TextField>
-      <Button layoutX="314.0" layoutY="284.0" mnemonicParsing="false" onAction="#numSimulsContinue" prefHeight="40.0" prefWidth="121.0" style="-fx-background-color: black; -fx-background-radius: 15;" text="Continuar" textFill="WHITE">
+      <Button layoutX="297.0" layoutY="283.0" mnemonicParsing="false" onAction="#numSimulsContinue" prefHeight="40.0" prefWidth="121.0" style="-fx-background-color: black; -fx-background-radius: 15;" text="Continuar" textFill="WHITE">
          <font>
             <Font name="Century" size="19.0" />
          </font>
