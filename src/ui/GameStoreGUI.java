@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -40,91 +41,211 @@ public class GameStoreGUI {
 
 	@FXML
 	private ImageView startButton;
-	
-	@FXML
-    private ImageView shortBackground;
 
-    @FXML
-    private ImageView shortTitle;
-
-    @FXML
-    private ImageView shortMen;
-
-    @FXML
-    private ImageView shortWoman;
 
 	@FXML
-    private ImageView imageDatesBackground;
+	private ImageView imageDatesBackground;
 
-    @FXML
-    private ImageView imageDateTitle;
+	@FXML
+	private ImageView imageDateTitle;
 
-    @FXML
-    private TextField numDatesCashiers;
+	@FXML
+	private TextField numDatesCashiers;
 
-    @FXML
-    private TextField numDatesStand;
-    
-    @FXML
-    private ImageView standsBackground;
+	@FXML
+	private TextField numDatesStand;
 
-    @FXML
-    private ImageView standsTitle;
+	@FXML
+	private ImageView standsBackground;
 
-    @FXML
-    private TextField standsName;
+	@FXML
+	private ImageView standsTitle;
 
-    @FXML
-    private TextField standsNumGames;
+	@FXML
+	private TextField standsName;
 
-    @FXML
-    private Label standsLabelNumStands;
+	@FXML
+	private TextField standsNumGames;
 
-    
-    @FXML
-    private ImageView gameBackground;
+	@FXML
+	private Label standsLabelNumStands;
 
-    @FXML
-    private ImageView gameTitle;
+	@FXML
+	private ImageView gameBackground;
 
-    @FXML
-    private TextField codeGame;
+	@FXML
+	private ImageView gameTitle;
 
-    @FXML
-    private TextField priceGame;
+	@FXML
+	private TextField codeGame;
 
-    @FXML
-    private Label numGame;
+	@FXML
+	private TextField priceGame;
 
-    @FXML
-    private TextField unitsGame;
+	@FXML
+	private Label numGame;
 
-    @FXML
-    void addGame(ActionEvent event) {
+	@FXML
+	private TextField unitsGame;
+	@FXML
+	private ImageView numClientsBackground;
 
-    }
-    @FXML
-    void standsAddStands(ActionEvent event) throws IOException {
-    	int  numGame = 0;
-    	if (standsNumGames.getText().equals("")||standsName.getText().equals("") ) {
+	@FXML
+	private ImageView numClientsTitle;
+
+	@FXML
+	private TextField numClients;
+	@FXML
+	private ImageView imageClientBac;
+
+	@FXML
+	private ImageView imgDatesClients;
+
+	@FXML
+	private TextField txtIdClients;
+
+	@FXML
+	private TextField txtCodesGamesClients;
+
+	@FXML
+	private Label datesClientsNum;
+
+	@FXML
+	private ImageView shortBackground;
+
+	@FXML
+	private ImageView shortTitle;
+
+	@FXML
+	private ImageView shortMen;
+
+	@FXML
+	private ImageView shortWoman;
+
+	@FXML
+	private ProgressIndicator shortProgreesInd;
+
+	@FXML
+	void addCustomer(ActionEvent event) throws IOException {
+		int idClients = 0;
+		String codesGame = txtCodesGamesClients.getText();
+		if (txtIdClients.getText().equals("") || txtCodesGamesClients.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "Debe llenar los datos solicitados", "Error",
+					JOptionPane.WARNING_MESSAGE);
+		} else {
+			try {
+				idClients = Integer.parseInt(txtIdClients.getText());
+				if (idClients > 0) {
+
+					// simulacion de carga
+
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("short.fxml"));
+					loader.setController(this);
+					Parent load = loader.load();
+					mainPane.getChildren().clear();
+					mainPane.setTop(load);
+
+				} else {
+					JOptionPane.showMessageDialog(null, "Debe haber mas de un cliente", "Error",
+							JOptionPane.WARNING_MESSAGE);
+				}
+			} catch (NumberFormatException nfe) {
+				txtIdClients.setText("");
+				JOptionPane.showMessageDialog(null, "Debe ser un numero", "Error", JOptionPane.WARNING_MESSAGE);
+			}
+
+		}
+	}
+
+	@FXML
+	void numClientsContinues(ActionEvent event) throws IOException {
+		if (numClients.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "Debe llenar los datos solicitados", "Error",
+					JOptionPane.WARNING_MESSAGE);
+		} else {
+			try {
+				int numClient = Integer.parseInt(numClients.getText());
+				if (numClient > 0) {
+
+					// se carga para llenar datos de los clientes
+
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("date-clients.fxml"));
+					loader.setController(this);
+					Parent load = loader.load();
+					mainPane.getChildren().clear();
+					mainPane.setTop(load);
+
+				} else {
+					JOptionPane.showMessageDialog(null, "Debe haber mas de un cliente", "Error",
+							JOptionPane.WARNING_MESSAGE);
+				}
+			} catch (NumberFormatException nfe) {
+				priceGame.setText("");
+				unitsGame.setText("");
+				JOptionPane.showMessageDialog(null, "Debe ser un numero", "Error", JOptionPane.WARNING_MESSAGE);
+			}
+
+		}
+	}
+
+	@FXML
+	void addGame(ActionEvent event) throws IOException {
+		int pricesGame = 0;
+		int codeGam = 0;
+		int unitGame = 0;
+		if (priceGame.getText().equals("") || codeGame.getText().equals("") || unitsGame.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "Debe llenar los datos solicitados", "Error",
+					JOptionPane.WARNING_MESSAGE);
+		} else {
+			try {
+				pricesGame = Integer.parseInt(priceGame.getText());
+				unitGame = Integer.parseInt(unitsGame.getText());
+				codeGam = Integer.parseInt(codeGame.getText());
+				if (pricesGame < 1 || unitGame < 1) {
+					JOptionPane.showMessageDialog(null, "Los datos deben ser mayor a 0", "Error",
+							JOptionPane.WARNING_MESSAGE);
+					priceGame.setText("");
+					unitsGame.setText("");
+				} else {
+
+					// cargamos donde se el numero de clientes
+
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("num-clients.fxml"));
+					loader.setController(this);
+					Parent load = loader.load();
+					mainPane.getChildren().clear();
+					mainPane.setTop(load);
+				}
+			} catch (NumberFormatException nfe) {
+				priceGame.setText("");
+				unitsGame.setText("");
+				JOptionPane.showMessageDialog(null, "Debe ser un numero", "Error", JOptionPane.WARNING_MESSAGE);
+			}
+
+		}
+	}
+
+	@FXML
+	void standsAddStands(ActionEvent event) throws IOException {
+		int numGame = 0;
+		if (standsNumGames.getText().equals("") || standsName.getText().equals("")) {
 			JOptionPane.showMessageDialog(null, "Debe llenar los datos solicitados", "Error",
 					JOptionPane.WARNING_MESSAGE);
 			standsNumGames.setText("");
 			standsName.setText("");
-		}else {
+		} else {
 			try {
-				numGame= Integer.parseInt(standsNumGames.getText());
-				if( numGame< 1) {
+				numGame = Integer.parseInt(standsNumGames.getText());
+				if (numGame < 1) {
 					JOptionPane.showMessageDialog(null, "Los datos deben ser mayor a 0", "Error",
 							JOptionPane.WARNING_MESSAGE);
 					standsNumGames.setText("");
 					standsName.setText("");
-				}else {
-						
-					
-					//cargamos donde se piden los valores de los juegos 
-					
-					FXMLLoader loader = new FXMLLoader(getClass().getResource("games.fxml"));			
+				} else {
+
+					// cargamos donde se piden los valores de los juegos
+
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("games.fxml"));
 					loader.setController(this);
 					Parent load = loader.load();
 					mainPane.getChildren().clear();
@@ -133,39 +254,37 @@ public class GameStoreGUI {
 			} catch (NumberFormatException nfe) {
 				standsNumGames.setText("");
 				standsName.setText("");
-				JOptionPane.showMessageDialog(null, "Debe ser un numero", "Error",
-						JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Debe ser un numero", "Error", JOptionPane.WARNING_MESSAGE);
 			}
 
 		}
-    }
+	}
 
-
-    @FXML
-    void addDatesSimuls(ActionEvent event) throws IOException {
-    	int numCashiers = 0;
-    	int  numStand = 0;
-    	if (numDatesStand.getText().equals("")||numDatesCashiers.getText().equals("") ) {
+	@FXML
+	void addDatesSimuls(ActionEvent event) throws IOException {
+		int numCashiers = 0;
+		int numStand = 0;
+		if (numDatesStand.getText().equals("") || numDatesCashiers.getText().equals("")) {
 			JOptionPane.showMessageDialog(null, "Debe llenar los datos solicitados", "Error",
 					JOptionPane.WARNING_MESSAGE);
 			numDatesStand.setText("");
 			numDatesCashiers.setText("");
-		}else {
+		} else {
 			try {
-				numCashiers= Integer.parseInt(numDatesCashiers.getText());
-				numStand= Integer.parseInt(numDatesStand.getText());
-				if(numCashiers < 1 || numStand< 1) {
+				numCashiers = Integer.parseInt(numDatesCashiers.getText());
+				numStand = Integer.parseInt(numDatesStand.getText());
+				if (numCashiers < 1 || numStand < 1) {
 					JOptionPane.showMessageDialog(null, "Los datos deben ser mayor a 0", "Error",
 							JOptionPane.WARNING_MESSAGE);
 					numDatesStand.setText("");
 					numDatesCashiers.setText("");
-				}else {
-						
-					FXMLLoader loader = new FXMLLoader(getClass().getResource("stands.fxml"));			
+				} else {
+
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("stands.fxml"));
 					loader.setController(this);
 					Parent load = loader.load();
 					mainPane.getChildren().clear();
-					
+
 					Image image = new Image("/images/background.png");
 					standsBackground.setImage(image);
 					Image image1 = new Image("/images/infoStands.png");
@@ -175,29 +294,29 @@ public class GameStoreGUI {
 			} catch (NumberFormatException nfe) {
 				numDatesStand.setText("");
 				numDatesCashiers.setText("");
-				JOptionPane.showMessageDialog(null, "Debe ser un numero", "Error",
-						JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Debe ser un numero", "Error", JOptionPane.WARNING_MESSAGE);
 			}
 
 		}
-    }
+	}
+
 	@FXML
 	void numSimulsContinue(ActionEvent event) throws IOException {
-		int numSimul =0;
-		if (numSimulsNum.getText().equals("") ) {
+		int numSimul = 0;
+		if (numSimulsNum.getText().equals("")) {
 			JOptionPane.showMessageDialog(null, "Debe llenar los datos solicitados", "Error",
 					JOptionPane.WARNING_MESSAGE);
 			numSimulsNum.setText("");
-		}else {
+		} else {
 			try {
-				numSimul= Integer.parseInt(numSimulsNum.getText());
-				if(numSimul < 1) {
+				numSimul = Integer.parseInt(numSimulsNum.getText());
+				if (numSimul < 1) {
 					JOptionPane.showMessageDialog(null, "La simulacion debe tener una o mas repeticiones", "Error",
 							JOptionPane.WARNING_MESSAGE);
 					numSimulsNum.setText("");
-				}else {
-					
-					FXMLLoader loader = new FXMLLoader(getClass().getResource("dates-simuls.fxml"));			
+				} else {
+
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("dates-simuls.fxml"));
 					loader.setController(this);
 					Parent load = loader.load();
 					mainPane.getChildren().clear();
@@ -206,12 +325,11 @@ public class GameStoreGUI {
 					imageDatesBackground.setImage(image);
 					Image image1 = new Image("/images/datesSimul.png");
 					imageDateTitle.setImage(image1);
-					
+
 					mainPane.setTop(load);
 				}
 			} catch (NumberFormatException nfe) {
-				JOptionPane.showMessageDialog(null, "Debe ser un numero", "Error",
-						JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Debe ser un numero", "Error", JOptionPane.WARNING_MESSAGE);
 				numSimulsNum.setText("");
 			}
 
