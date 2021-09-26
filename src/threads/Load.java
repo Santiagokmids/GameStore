@@ -6,11 +6,11 @@ import javafx.application.Platform;
 import javafx.scene.control.ProgressIndicator;
 import ui.GameStoreGUI;
 
-public class Loading extends Thread{
+public class Load extends Thread{
 	private ProgressIndicator prgres1;
 	private double porcentaje;
 	private GameStoreGUI gameStore;
-	public Loading(GameStoreGUI gameStoreGUI,ProgressIndicator pg) {
+	public Load(GameStoreGUI gameStoreGUI,ProgressIndicator pg) {
 		prgres1=pg;
 		porcentaje = 0;
 		gameStore = gameStoreGUI;
@@ -28,7 +28,7 @@ public class Loading extends Thread{
 		}
 		Platform.runLater(() -> { // Para cambiar algo grafico-- desde un hilo alternativo
 			try {
-				gameStore.loadSelectGame();
+				gameStore.payingGame();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

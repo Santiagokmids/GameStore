@@ -16,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import threads.Load;
 import threads.Loading;
 
 public class GameStoreGUI {
@@ -164,7 +165,39 @@ public class GameStoreGUI {
     private ImageView listLeft;
 
     @FXML
+    private ImageView payingBackgroud;
+
+    @FXML
+    private ImageView payingTitle;
+
+    @FXML
+    private ImageView payingCashier;
+
+    @FXML
+    private ImageView payingQueue;
+
+    @FXML
+    private Label payingLabelNumCashier;
+
+    @FXML
+    private Label payingNumPeople;
+
+    @FXML
+    private Label money;
+
+    @FXML
     private ImageView listRight;
+    public void payingGame() throws IOException {
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("paying.fxml"));
+		loader.setController(this);
+		Parent load = loader.load();
+		mainPane.getChildren().clear();
+
+		// Imagenes de pagando
+		
+		mainPane.setTop(load);
+		
+	}
     
 	public void loadSelectGame() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("selectGames.fxml"));
@@ -186,7 +219,7 @@ public class GameStoreGUI {
 		selectGameWomanChoosing.setImage(image5);
 		mainPane.setTop(load);
 		mainPane.setTop(load);
-		Loading pc = new Loading(this,selectGamesProgress);
+		Load pc = new Load(this,selectGamesProgress);
 		pc.start();
 	}
 	public GameStoreGUI() {
@@ -559,6 +592,7 @@ public class GameStoreGUI {
 		Loading pc = new Loading(this,shortProgreesInd);
 		pc.start();
 	}
+	
 
 	
 }
