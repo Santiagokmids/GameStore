@@ -1,14 +1,23 @@
 package dataStructures;
 
-public class HashTable<K, V> {
+import model.IElementsOfStore;
+
+public class HashTable<K, V> implements IElementsOfStore{
 	
 	private int sizeArray;
 	private HashNode<K, V>[] nodes;
+	private int lengthTable;
 	
 	public HashTable(int sizeArray) {
-		createTable(sizeArray);
+		create();
+		lengthTable = sizeArray;
 	}
 	
-	public void createTable(int sizeArray) {
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean create() {
+		nodes = (HashNode<K, V>[])(new HashNode[sizeArray]);
+		return true;
 	}
+
 }
