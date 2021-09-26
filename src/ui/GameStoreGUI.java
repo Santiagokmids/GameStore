@@ -538,6 +538,10 @@ public class GameStoreGUI {
 		shortBackground.setImage(image);
 		Image image1 = new Image("/images/short.png");
 		shortTitle.setImage(image1);
+		Image image2 = new Image("/images/men.png");
+		shortMen.setImage(image2);
+		Image image3 = new Image("/images/women.png");
+		shortWoman.setImage(image3);
 		mainPane.setTop(load);
 		Loading pc = new Loading(this,shortProgreesInd);
 		pc.start();
