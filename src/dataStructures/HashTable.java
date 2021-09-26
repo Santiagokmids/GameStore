@@ -10,5 +10,6 @@ public class HashTable<K, V> {
 	}
 	
 	public void createTable(int sizeArray) {
+	
 	}
 }
