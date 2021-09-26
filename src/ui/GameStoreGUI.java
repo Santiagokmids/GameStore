@@ -213,7 +213,7 @@ public class GameStoreGUI {
 	public GameStoreGUI() {
 		gameStore = new GameStore();
 	}
-	
+
 	public void payingGame() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("paying.fxml"));
 		loader.setController(this);
@@ -264,6 +264,7 @@ public class GameStoreGUI {
 
 	@FXML
 	void addCustomer(ActionEvent event) throws IOException {
+		
 		int idClients = 0;
 		String codesGame = txtCodesGamesClients.getText();
 
@@ -272,9 +273,22 @@ public class GameStoreGUI {
 					JOptionPane.WARNING_MESSAGE);
 		} else {
 			try {
+				
 				idClients = Integer.parseInt(txtIdClients.getText());
-				if (idClients > 0) {
-
+				
+				boolean verify = gameStore.verifyGames(codesGame);	
+				boolean verifyGames = gameStore.checkTheGames(codesGame);
+				
+				if(!verify) {
+					JOptionPane.showMessageDialog(null, "Datos sobre los juegos inválidos, ingreselos de nuevo", "Error",
+							JOptionPane.WARNING_MESSAGE);
+				}else if(!verifyGames) {
+					JOptionPane.showMessageDialog(null, "Alguno de los juegos ingresados no existe", "Error",
+							JOptionPane.WARNING_MESSAGE);
+				}else if(idClients > 0){
+					
+					gameStore.addClient(txtIdClients.getText(),txtCodesGamesClients.getText());
+					
 					if(contClients < numberClients) {
 						contClients++;
 						Platform.runLater(new Thread(){
@@ -289,9 +303,8 @@ public class GameStoreGUI {
 						enter = true;
 						loadApp();
 					}
-
 				} else {
-					JOptionPane.showMessageDialog(null, "Debe haber mas de un cliente", "Error",
+					JOptionPane.showMessageDialog(null, "La cédula o código del cliente es inválida", "Error",
 							JOptionPane.WARNING_MESSAGE);
 				}
 			} catch (NumberFormatException nfe) {
@@ -314,7 +327,7 @@ public class GameStoreGUI {
 
 					numberClients = numClient;
 					contClients = 1;
-
+					
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("dates-clients.fxml"));
 					loader.setController(this);
 					Parent load = loader.load();
@@ -362,45 +375,57 @@ public class GameStoreGUI {
 					unitsGame.setText("");
 					unitsGame.setText("");
 				} else {
-					
-					Game game = new Game(codeGam, pricesGame, unitGame, standsName.getText());
-					gameStore.getStands().get(contStand-1).getHash().inserTable(codeGam, game);
 
-					if(contGames < numGames) {
-						contGames++;
-						Platform.runLater(new Thread(){
-							public void run() {
-								numGame.setText(contGames+"");
-							}
-						});
-						bucleWindowGame();
-					}else if(contStand == standsCont) {
+					boolean verify = gameStore.searchGame(codeGam);
 
-						FXMLLoader loader = new FXMLLoader(getClass().getResource("num-clients.fxml"));
-						loader.setController(this);
-						Parent load = loader.load();
-						mainPane.getChildren().clear();
-
-						Image image = new Image("/images/background.png");
-						numClientsBackground.setImage(image);
-						Image image1 = new Image("/images/numClients.png");
-						numClientsTitle.setImage(image1);
-						mainPane.setTop(load);
+					if(verify) {
+						JOptionPane.showMessageDialog(null, "El código que ingresó ya le pertenece a otro juego", "Error", JOptionPane.WARNING_MESSAGE);
+						codeGame.setText("");
+						priceGame.setText("");
+						unitsGame.setText("");
 						
 					}else {
+						Game game = new Game(codeGam, pricesGame, unitGame, standsName.getText());
+						gameStore.getStands().get(contStand-1).getHash().inserTable(codeGam, game);
 
-						if(contStand < standsCont) {
-							contStand++;
+						if(contGames < numGames) {
+							contGames++;
 							Platform.runLater(new Thread(){
 								public void run() {
-									standsLabelNumStands.setText(contStand+"");
+									numGame.setText(contGames+"");
 								}
-							});		
+							});
+							bucleWindowGame();
+							
+						}else if(contStand == standsCont) {
+
+							FXMLLoader loader = new FXMLLoader(getClass().getResource("num-clients.fxml"));
+							loader.setController(this);
+							Parent load = loader.load();
+							mainPane.getChildren().clear();
+
+							Image image = new Image("/images/background.png");
+							numClientsBackground.setImage(image);
+							Image image1 = new Image("/images/numClients.png");
+							numClientsTitle.setImage(image1);
+							mainPane.setTop(load);
+
+						}else {
+
+							if(contStand < standsCont) {
+								contStand++;
+								Platform.runLater(new Thread(){
+									public void run() {
+										standsLabelNumStands.setText(contStand+"");
+									}
+								});		
+							}
+							contGames = 1;
+							bucleWindowStands();
 						}
-						contGames = 1;
-						bucleWindowStands();
 					}
 				}
+
 			}catch (NumberFormatException nfe) {
 				priceGame.setText("");
 				unitsGame.setText("");
@@ -409,18 +434,18 @@ public class GameStoreGUI {
 			}
 		}
 	}
-	
+
 	public Stand search(String name) {
 		boolean stop = false;
 		Stand stand = null;
-		
+
 		for (int i = 0; i < gameStore.getStands().size() && !stop; i++) {
 			if(name.equalsIgnoreCase(gameStore.getStands().get(i).getName())) {
 				stop = true;
-				 stand = gameStore.getStands().get(i);
+				stand = gameStore.getStands().get(i);
 			}
 		}
-		
+
 		return stand;
 	}
 
@@ -443,9 +468,9 @@ public class GameStoreGUI {
 					standsNumGames.setText("");
 					standsName.setText("");
 				} else {
-					
+
 					if(search(standsName.getText()) == null) {
-						
+
 						gameStore.getStands().get(contStand-1).setName(standsName.getText());
 						gameStore.getStands().get(contStand-1).setHash(new HashTable<>(numGame));
 
@@ -461,7 +486,7 @@ public class GameStoreGUI {
 						Image image1 = new Image("/images/games.png");
 						gameTitle.setImage(image1);
 						mainPane.setTop(load);
-						
+
 					} else {
 						JOptionPane.showMessageDialog(null, "El nombre de la estantería ya se encuentra registrado", "Error",
 								JOptionPane.WARNING_MESSAGE);

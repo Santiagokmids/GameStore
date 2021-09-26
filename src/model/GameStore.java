@@ -1,6 +1,5 @@
 package model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class GameStore {
@@ -8,7 +7,9 @@ public class GameStore {
 	public ArrayList<Stand>stands = new ArrayList<>();
 	private ArrayList<Client>client;
 	
-	public GameStore() {}
+	public GameStore() {
+		client = new ArrayList<>();
+	}
 	
 	public void createStand(int numberStand) {
 		
@@ -16,7 +17,64 @@ public class GameStore {
 			stands.add(new Stand(null, 0));
 		}
 	}
-
+	
+	public boolean verifyGames(String txtGames) {
+		
+		boolean verify = false;
+		
+		String[] games = txtGames.split(";");
+		int[] listGames = new int[games.length];
+		
+		try {
+			for (int i = 0; i < games.length; i++) {
+				listGames[i] = Integer.parseInt(games[i]);
+			}
+			verify = true;
+			
+		}catch (NumberFormatException nfe) {
+		}
+		
+		return verify;
+	}
+	
+	public boolean checkTheGames(String txtGames) {
+		
+		boolean verify = false;
+		boolean verifyGames;
+		
+		String[] games = txtGames.split(";");
+		int contGamesFinds = 0;
+		try {
+			for (int i = 0; i < stands.size() && !verify; i++) {
+				
+				verifyGames = false;
+				
+				for (int j = 0; j < games.length && !verifyGames; j++) {
+					
+					Game game = stands.get(i).getHash().searchElement(Integer.parseInt(games[j]));
+					
+					System.out.println(game.getCode());
+					
+					if(game != null) {
+						verifyGames = true;
+						contGamesFinds++;
+					}
+				}
+				
+				if(contGamesFinds == games.length) {
+					verify = true;
+				}
+			}
+			
+		}catch (NumberFormatException nfe) {
+		}
+		
+		return verify;
+	}
+	
+	public void addClient(String code,String codeGame) {
+		client.add(new Client(code, codeGame));
+	}
 	
 	/*
 	
@@ -57,7 +115,24 @@ public class GameStore {
 	public void addStand(String name,ArrayList<Game>games) {
 		
 	}
-	public void addClient(String code,String codeGame) {
-		client.add(new Client(code, codeGame));
+
+	public ArrayList<Client> getClient() {
+		return client;
+	}
+
+	public void setClient(ArrayList<Client> client) {
+		this.client = client;
+	}
+	
+	public boolean searchGame(int codeGame) {
+		boolean find = false;
+		
+		for(int i = 0;i < stands.size();i++) {
+			Game game = stands.get(i).getHash().searchElement(codeGame);
+			if(game != null) {
+				find = true;
+			}
+		}
+		return find;
 	}
 }
