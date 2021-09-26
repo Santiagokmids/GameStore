@@ -18,7 +18,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 
 public class GameStoreGUI {
-
 	@FXML
 	private BorderPane mainPane;
 
@@ -126,6 +125,7 @@ public class GameStoreGUI {
 	@FXML
 	private ProgressIndicator shortProgreesInd;
 
+
 	private int standsCont;
 	
 	private int numGames;
@@ -146,6 +146,7 @@ public class GameStoreGUI {
 	void addCustomer(ActionEvent event) throws IOException {
 		int idClients = 0;
 		String codesGame = txtCodesGamesClients.getText();
+		
 		if (txtIdClients.getText().equals("") || txtCodesGamesClients.getText().equals("")) {
 			JOptionPane.showMessageDialog(null, "Debe llenar los datos solicitados", "Error",
 					JOptionPane.WARNING_MESSAGE);
@@ -192,6 +193,7 @@ public class GameStoreGUI {
 					
 					numberClients = numClient;
 					contClients = 1;
+
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("dates-clients.fxml"));
 					loader.setController(this);
 					Parent load = loader.load();

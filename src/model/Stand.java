@@ -1,9 +1,10 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Stand {
 
 	private String name;
-	
 	public Stand(String name) {
 		this.name = name;
 	}
