@@ -45,7 +45,7 @@
             <Font name="Century" size="19.0" />
          </font>
       </Button>
-      <Label layoutX="460.0" layoutY="155.0" text="1">
+      <Label fx:id="datesClientsNum" layoutX="460.0" layoutY="155.0" text="1">
          <font>
             <Font name="Copperplate Gothic Bold" size="37.0" />
          </font>
