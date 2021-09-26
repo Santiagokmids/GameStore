@@ -130,13 +130,16 @@ public class GameStoreGUI {
 	
 	private int numGames;
 
-	private int cont;
+	private int contStand;
 	
 	private int contGames;
+	
+	private int numberClients;
+	
+	private int contClients;
 
 	public GameStoreGUI() {
-		cont = 1;
-		contGames = 1;
+		
 	}
 
 	@FXML
@@ -150,13 +153,20 @@ public class GameStoreGUI {
 			try {
 				idClients = Integer.parseInt(txtIdClients.getText());
 				if (idClients > 0) {
-					// simulacion de carga
-
-					FXMLLoader loader = new FXMLLoader(getClass().getResource("short.fxml"));
-					loader.setController(this);
-					Parent load = loader.load();
-					mainPane.getChildren().clear();
-					mainPane.setTop(load);
+					
+					if(contClients < numberClients) {
+						contClients++;
+						Platform.runLater(new Thread(){
+							public void run() {
+								datesClientsNum.setText(contClients+"");
+							}
+						});
+						txtIdClients.setText("");
+						txtCodesGamesClients.setText("");
+					}
+					else {
+						loadApp();
+					}
 
 				} else {
 					JOptionPane.showMessageDialog(null, "Debe haber mas de un cliente", "Error",
@@ -179,7 +189,9 @@ public class GameStoreGUI {
 			try {
 				int numClient = Integer.parseInt(numClients.getText());
 				if (numClient > 0) {
-
+					
+					numberClients = numClient;
+					contClients = 1;
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("dates-clients.fxml"));
 					loader.setController(this);
 					Parent load = loader.load();
@@ -236,7 +248,7 @@ public class GameStoreGUI {
 						bucleWindowGame();
 					}
 					
-					else if(cont == standsCont) {
+					else if(contStand == standsCont) {
 						FXMLLoader loader = new FXMLLoader(getClass().getResource("num-clients.fxml"));
 						loader.setController(this);
 						Parent load = loader.load();
@@ -250,14 +262,15 @@ public class GameStoreGUI {
 					}
 						
 					else {
-						if(cont < standsCont) {
-							cont++;
+						if(contStand < standsCont) {
+							contStand++;
 							Platform.runLater(new Thread(){
 								public void run() {
-									standsLabelNumStands.setText(cont+"");
+									standsLabelNumStands.setText(contStand+"");
 								}
 							});		
 						}
+						contGames = 1;
 						bucleWindowStands();
 					}
 				}
@@ -290,6 +303,7 @@ public class GameStoreGUI {
 				} else {
 					
 					numGames = numGame;
+					contGames = 1;
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("games.fxml"));
 					loader.setController(this);
 					Parent load = loader.load();
@@ -310,6 +324,20 @@ public class GameStoreGUI {
 
 		}
 
+	}
+	
+	public void bucleWindowClient() throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("dates-clients.fxml"));
+		loader.setController(this);
+		Parent load = loader.load();
+		mainPane.getChildren().clear();
+
+		Image image = new Image("/images/background.png");
+		imageClientBac.setImage(image);
+		Image image1 = new Image("/images/datesClients.png");
+		imgDatesClients.setImage(image1);
+		mainPane.setTop(load);
 	}
 	
 	public void bucleWindowGame() throws IOException {
@@ -363,6 +391,7 @@ public class GameStoreGUI {
 				} else {
 
 					standsCont = numStand;
+					contStand = 1;
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("stands.fxml"));
 					loader.setController(this);
 					Parent load = loader.load();
