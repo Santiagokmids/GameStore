@@ -18,8 +18,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 
 public class GameStoreGUI {
-	private int repit =0;
-	private int rep = 1;
 	@FXML
 	private BorderPane mainPane;
 
@@ -153,22 +151,14 @@ public class GameStoreGUI {
 				idClients = Integer.parseInt(txtIdClients.getText());
 				if (idClients > 0) {
 					// simulacion de carga
-					if(repit == rep) {
+					
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("short.fxml"));
 					loader.setController(this);
 					Parent load = loader.load();
 					mainPane.getChildren().clear();
 					mainPane.setTop(load);
 					
-					}else{
-						rep=rep+1;
-						FXMLLoader loader = new FXMLLoader(getClass().getResource("dates-clients.fxml"));						
-						loader.setController(this);
-						Parent load = loader.load();					
-						
-						mainPane.getChildren().clear();
-						mainPane.setTop(load);
-					}
+					
 				} else {
 					JOptionPane.showMessageDialog(null, "Debe haber mas de un cliente", "Error",
 							JOptionPane.WARNING_MESSAGE);
@@ -190,7 +180,6 @@ public class GameStoreGUI {
 			try {
 				int numClient = Integer.parseInt(numClients.getText());
 				if (numClient > 0) {
-					repit = numClient;
 					// se carga para llenar datos de los clientes
 
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("dates-clients.fxml"));
