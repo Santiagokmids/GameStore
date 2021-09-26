@@ -187,16 +187,26 @@ public class GameStoreGUI {
 
     @FXML
     private ImageView listRight;
+    
+    public GameStoreGUI() {
+		
+	}
+    
     public void payingGame() throws IOException {
     	FXMLLoader loader = new FXMLLoader(getClass().getResource("paying.fxml"));
 		loader.setController(this);
 		Parent load = loader.load();
 		mainPane.getChildren().clear();
-
-		// Imagenes de pagando
 		
+		Image image = new Image("/images/background.png");
+		payingBackgroud.setImage(image);
+		Image image1 = new Image("/images/paying.png");
+		payingTitle.setImage(image1);
+		Image image2 = new Image("/images/cashier.png");
+		payingCashier.setImage(image2);
+		Image image3 = new Image("/images/queue.png");
+		payingQueue.setImage(image3);
 		mainPane.setTop(load);
-		
 	}
     
 	public void loadSelectGame() throws IOException {
@@ -221,9 +231,6 @@ public class GameStoreGUI {
 		mainPane.setTop(load);
 		Load pc = new Load(this,selectGamesProgress);
 		pc.start();
-	}
-	public GameStoreGUI() {
-		
 	}
 	
 	@FXML

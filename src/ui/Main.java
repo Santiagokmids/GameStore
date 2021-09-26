@@ -26,9 +26,9 @@ public class Main extends Application{
 			fxmlLoader.setController(gameStore);
 			
 			Parent root = fxmlLoader.load();
-			Image icon= new Image("/images/backgroundStart.png");
+			Image icon= new Image("/images/logo.png");
 			Scene scene = new Scene(root);
-			 scene.getStylesheets().add("/images/backgroundStart.png");
+			scene.getStylesheets().add("/images/logo.png");
 			primaryStage.setScene(scene);
 			primaryStage.getIcons().add(icon);
 			primaryStage.setTitle("Game Store");

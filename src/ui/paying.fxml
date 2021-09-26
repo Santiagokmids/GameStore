@@ -1,58 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="426.0" prefWidth="751.0" style="-fx-background-color: #38A793;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="715.0" style="-fx-background-color: #38A793;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fx:id="payingBackgroud" fitHeight="421.0" fitWidth="830.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../Downloads/background.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="payingTitle" fitHeight="407.0" fitWidth="684.0" layoutX="26.0" layoutY="-117.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../Downloads/paying.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="payingCashier" fitHeight="206.0" fitWidth="712.0" layoutX="-24.0" layoutY="182.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../Downloads/cashier.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="payingQueue" fitHeight="339.0" fitWidth="605.0" layoutX="224.0" layoutY="127.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../Downloads/queue.png" />
-         </image>
-      </ImageView>
-      <Label layoutX="48.0" layoutY="154.0" text="Número de cajeros disponibles:">
+      <ImageView fx:id="payingBackgroud" fitHeight="421.0" fitWidth="830.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="payingTitle" fitHeight="407.0" fitWidth="684.0" layoutX="16.0" layoutY="-128.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="payingCashier" fitHeight="206.0" fitWidth="712.0" layoutX="-26.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="payingQueue" fitHeight="339.0" fitWidth="605.0" layoutX="222.0" layoutY="102.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="40.0" layoutY="133.0" text="Número de cajeros disponibles:">
          <font>
             <Font name="Britannic Bold" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="439.0" layoutY="154.0" text="Personas en la fila:">
+      <Label layoutX="431.0" layoutY="133.0" text="Personas en la fila:">
          <font>
             <Font name="Britannic Bold" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="payingLabelNumCashier" alignment="CENTER" layoutX="54.0" layoutY="183.0" prefHeight="22.0" prefWidth="267.0" text="1">
+      <Label fx:id="payingLabelNumCashier" alignment="CENTER" layoutX="55.0" layoutY="155.0" prefHeight="22.0" prefWidth="267.0" text="1">
          <font>
             <Font name="Britannic Bold" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="payingNumPeople" alignment="CENTER" layoutX="392.0" layoutY="183.0" prefHeight="22.0" prefWidth="267.0" text="1">
+      <Label fx:id="payingNumPeople" alignment="CENTER" layoutX="393.0" layoutY="155.0" prefHeight="22.0" prefWidth="267.0" text="1">
          <font>
             <Font name="Britannic Bold" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="58.0" layoutY="392.0" text="Los clientes están realizando la compra y se están organizando en el orden de salida...">
+      <Label layoutX="57.0" layoutY="363.0" text="Los clientes están realizando la compra y se están organizando en el orden de salida...">
          <font>
             <Font name="Century" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="money" alignment="CENTER" layoutX="79.0" layoutY="263.0" prefHeight="10.0" prefWidth="51.0" text="\$120000" textAlignment="CENTER" />
+      <Label fx:id="money" alignment="CENTER" layoutX="77.0" layoutY="238.0" prefHeight="10.0" prefWidth="51.0" text="0" textAlignment="CENTER" />
    </children>
 </Pane>
