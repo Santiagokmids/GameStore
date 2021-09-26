@@ -92,9 +92,10 @@ public class HashTable<K, V> implements IElementsOfStore, IHashTable<K, V>{
 		int i = 0;
 
 		while(i < sizeArray && !verify) {
+			
 			Integer index = (((Integer)key) + i) % sizeArray;
 
-			if(nodes[index].getKey() == key) {
+			if(nodes[index] != null && nodes[index].getKey() == key) {
 				verify = true;
 				newNode = nodes[index];
 			}else {

@@ -1,6 +1,5 @@
 package model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class GameStore {
@@ -123,5 +122,17 @@ public class GameStore {
 
 	public void setClient(ArrayList<Client> client) {
 		this.client = client;
+	}
+	
+	public boolean searchGame(int codeGame) {
+		boolean find = false;
+		
+		for(int i = 0;i < stands.size();i++) {
+			Game game = stands.get(i).getHash().searchElement(codeGame);
+			if(game != null) {
+				find = true;
+			}
+		}
+		return find;
 	}
 }
