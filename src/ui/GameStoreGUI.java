@@ -186,7 +186,8 @@ public class GameStoreGUI {
 		selectGameWomanChoosing.setImage(image5);
 		mainPane.setTop(load);
 		mainPane.setTop(load);
-		
+		Loading pc = new Loading(this,selectGamesProgress);
+		pc.start();
 	}
 	public GameStoreGUI() {
 		
