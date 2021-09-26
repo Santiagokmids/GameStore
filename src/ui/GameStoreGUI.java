@@ -160,15 +160,23 @@ public class GameStoreGUI {
     private ProgressIndicator selectGamesProgress;
 	public void loadSelectGame() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("selectGames.fxml"));
-		
-		
-		
-		// va la carga de juegos
-		
-		
 		loader.setController(this);
 		Parent load = loader.load();
 		mainPane.getChildren().clear();
+		
+		Image image = new Image("/images/background.png");
+		selectGameBackground.setImage(image);
+		Image image1 = new Image("/images/selectGames.png");
+		selectGameTitle.setImage(image1);
+		Image image2 = new Image("/images/stand.png");
+		selectGamesLeftStand.setImage(image2);
+		Image image3 = new Image("/images/stand.png");
+		selectGameStandRigth.setImage(image3);
+		Image image4 = new Image("/images/man.png");
+		selectGameMenChoosing.setImage(image4);
+		Image image5 = new Image("/images/woman.png");
+		selectGameWomanChoosing.setImage(image5);
+		mainPane.setTop(load);
 		mainPane.setTop(load);
 		
 	}
