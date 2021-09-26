@@ -2,7 +2,7 @@ package dataStructures;
 
 import model.IElementsOfStore;
 
-public class HashTable<K, V> implements IElementsOfStore{
+public class HashTable<K, V, L> implements IElementsOfStore<L>{
 	
 	private int sizeArray;
 	private HashNode<K, V>[] nodes;
