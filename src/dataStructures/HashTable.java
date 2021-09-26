@@ -2,7 +2,7 @@ package dataStructures;
 
 import model.IElementsOfStore;
 
-public class HashTable<K, V, L> implements IElementsOfStore<L>, IHashTable<K, V>{
+public class HashTable<K, V> implements IElementsOfStore, IHashTable<K, V>{
 	
 	private int sizeArray;
 	private HashNode<K, V>[] nodes;
@@ -49,7 +49,7 @@ public class HashTable<K, V, L> implements IElementsOfStore<L>, IHashTable<K, V>
 		
 		Integer i = index;
 		
-		while(i <= sizeHashTable || !verify) {
+		while(i <= sizeHashTable && !verify) {
 			
 			if(nodes[i] == null) {
 				verify = true;
@@ -66,11 +66,14 @@ public class HashTable<K, V, L> implements IElementsOfStore<L>, IHashTable<K, V>
 	public boolean deleteElement(K key) {
 		
 		boolean verify = false;
+		Integer i = (Integer)key % sizeHashTable;
 		
-		for (int i = 0; i < nodes.length && !verify; i++) {
+		while(i <= sizeHashTable && !verify) {
 			if(nodes[i].getKey() == key) {
 				verify = true;
 				nodes[i] = null;
+			}else {
+				i++;
 			}
 		}
 		return verify;

@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
+import dataStructures.HashTable;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,6 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import model.GameStore;
 import threads.Load;
 import threads.Loading;
 
@@ -188,9 +190,11 @@ public class GameStoreGUI {
     @FXML
     private ImageView listRight;
     
+    private GameStore gameStore;
+    
     public GameStoreGUI() {
-		
-	}
+    	gameStore = new GameStore();
+    }
     
     public void payingGame() throws IOException {
     	FXMLLoader loader = new FXMLLoader(getClass().getResource("paying.fxml"));
@@ -313,6 +317,7 @@ public class GameStoreGUI {
 
 	@FXML
 	void addGame(ActionEvent event) throws IOException {
+		
 		int pricesGame = 0;
 		int codeGam = 0;
 		int unitGame = 0;
@@ -342,6 +347,9 @@ public class GameStoreGUI {
 					}
 					
 					else if(contStand == standsCont) {
+						
+						
+						
 						FXMLLoader loader = new FXMLLoader(getClass().getResource("num-clients.fxml"));
 						loader.setController(this);
 						Parent load = loader.load();
@@ -378,6 +386,7 @@ public class GameStoreGUI {
 
 	@FXML
 	void standsAddStands(ActionEvent event) throws IOException {
+		
 		int numGame = 0;
 
 		if (standsNumGames.getText().equals("") || standsName.getText().equals("")) {
@@ -395,6 +404,10 @@ public class GameStoreGUI {
 					standsName.setText("");
 				} else {
 					
+					gameStore.getStands().get(contStand-1).setName(standsName.getText());
+					gameStore.getStands().get(contStand-1).setHash(new HashTable<>(numGame));;
+					
+					System.out.println(gameStore.getStands().get(contStand-1));
 					numGames = numGame;
 					contGames = 1;
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("games.fxml"));
@@ -412,11 +425,8 @@ public class GameStoreGUI {
 			} catch (NumberFormatException nfe) {
 				standsNumGames.setText("");
 				standsName.setText("");
-
 			}
-
 		}
-
 	}
 	
 	public void bucleWindowClient() throws IOException {
@@ -482,7 +492,9 @@ public class GameStoreGUI {
 					numDatesStand.setText("");
 					numDatesCashiers.setText("");
 				} else {
-
+					
+					gameStore.createStand(numStand);
+					
 					standsCont = numStand;
 					contStand = 1;
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("stands.fxml"));
@@ -599,7 +611,12 @@ public class GameStoreGUI {
 		Loading pc = new Loading(this,shortProgreesInd);
 		pc.start();
 	}
-	
 
-	
+	public GameStore getGameStore() {
+		return gameStore;
+	}
+
+	public void setGameStore(GameStore gameStore) {
+		this.gameStore = gameStore;
+	}
 }
