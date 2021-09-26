@@ -11,8 +11,8 @@
    <children>
       <ImageView fx:id="shortBackground" fitHeight="450.0" fitWidth="714.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="shortTitle" fitHeight="420.0" fitWidth="756.0" layoutX="-16.0" layoutY="-104.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="shortMen" fitHeight="159.0" fitWidth="160.0" layoutX="152.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="shortWoman" fitHeight="159.0" fitWidth="159.0" layoutX="379.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shortMen" fitHeight="202.0" fitWidth="239.0" layoutX="132.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shortWoman" fitHeight="256.0" fitWidth="230.0" layoutX="344.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true" />
       <Label layoutX="24.0" layoutY="348.0" text="Se están ordenando las listas de juegos de cada cliente de acuerdo a las estanterías...">
          <font>
             <Font name="Book Antiqua" size="18.0" />
@@ -23,5 +23,7 @@
             <Cursor fx:constant="WAIT" />
          </cursor>
       </ProgressIndicator>
+      <ImageView fx:id="listLeft" fitHeight="113.0" fitWidth="144.0" layoutX="80.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="listRight" fitHeight="113.0" fitWidth="144.0" layoutX="459.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </Pane>

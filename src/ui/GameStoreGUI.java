@@ -138,6 +138,7 @@ public class GameStoreGUI {
 	private int numberClients;
 	
 	private int contClients;
+	
 	@FXML
     private ImageView selectGameBackground;
 
@@ -158,6 +159,13 @@ public class GameStoreGUI {
 
     @FXML
     private ProgressIndicator selectGamesProgress;
+    
+    @FXML
+    private ImageView listLeft;
+
+    @FXML
+    private ImageView listRight;
+    
 	public void loadSelectGame() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("selectGames.fxml"));
 		loader.setController(this);
@@ -528,7 +536,7 @@ public class GameStoreGUI {
 	}
 	@FXML
 	public void startSimul(MouseEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("short.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("sort.fxml"));
 		
 		loader.setController(this);
 		Parent load = loader.load();
@@ -542,6 +550,10 @@ public class GameStoreGUI {
 		shortMen.setImage(image2);
 		Image image3 = new Image("/images/women.png");
 		shortWoman.setImage(image3);
+		Image image4 = new Image("/images/list.png");
+		listLeft.setImage(image4);
+		Image image5 = new Image("/images/list.png");
+		listRight.setImage(image5);
 		mainPane.setTop(load);
 		Loading pc = new Loading(this,shortProgreesInd);
 		pc.start();
