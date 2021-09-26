@@ -89,6 +89,10 @@ class GameStoreTest {
 		boolean hash = hashTable.verifySpace();
 		assertTrue(hash);
 		assertEquals(25, hashTable.getSizeArray());
+		hashTable = new HashTable<>(10);
+		boolean hash2 = hashTable.verifySpace();
+		assertTrue(hash2);
+		assertEquals(10, hashTable.getSizeArray());
 	}
 
 }
