@@ -1,6 +1,6 @@
 package model;
 
-public interface IElementsOfStore<L> {
+public interface IElementsOfStore {
 	
 	public boolean create();
 }
