@@ -81,11 +81,15 @@ public class HashTable<K, V, L> implements IElementsOfStore<L>, IHashTable<K, V>
 		
 		boolean verify = false;
 		HashNode<K, V> newNode = new HashNode<K, V>(null, null);
+		Integer i = (Integer)key % sizeHashTable;
 		
-		for (int i = 0; i < nodes.length && !verify; i++) {
+		while(i <= sizeHashTable && !verify) {
+			
 			if(nodes[i].getKey() == key) {
 				verify = true;
 				newNode = nodes[i];
+			}else {
+				i++;
 			}
 		}
 		
