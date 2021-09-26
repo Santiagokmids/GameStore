@@ -262,6 +262,7 @@ public class GameStoreGUI {
 
 	@FXML
 	void addCustomer(ActionEvent event) throws IOException {
+		
 		int idClients = 0;
 		String codesGame = txtCodesGamesClients.getText();
 
@@ -270,9 +271,22 @@ public class GameStoreGUI {
 					JOptionPane.WARNING_MESSAGE);
 		} else {
 			try {
+				
 				idClients = Integer.parseInt(txtIdClients.getText());
-				if (idClients > 0) {
-
+				
+				boolean verify = gameStore.verifyGames(codesGame);	
+				boolean verifyGames = gameStore.checkTheGames(codesGame);
+				
+				if(!verify) {
+					JOptionPane.showMessageDialog(null, "Datos sobre los juegos inválidos, ingreselos de nuevo", "Error",
+							JOptionPane.WARNING_MESSAGE);
+				}else if(!verifyGames) {
+					JOptionPane.showMessageDialog(null, "Alguno de los juegos ingresados no existe", "Error",
+							JOptionPane.WARNING_MESSAGE);
+				}else if(idClients > 0){
+					
+					gameStore.addClient(txtIdClients.getText(),txtCodesGamesClients.getText());
+					
 					if(contClients < numberClients) {
 						contClients++;
 						Platform.runLater(new Thread(){
@@ -287,9 +301,8 @@ public class GameStoreGUI {
 						enter = true;
 						loadApp();
 					}
-
 				} else {
-					JOptionPane.showMessageDialog(null, "Debe haber mas de un cliente", "Error",
+					JOptionPane.showMessageDialog(null, "La cédula o código del cliente es inválida", "Error",
 							JOptionPane.WARNING_MESSAGE);
 				}
 			} catch (NumberFormatException nfe) {
@@ -312,7 +325,7 @@ public class GameStoreGUI {
 
 					numberClients = numClient;
 					contClients = 1;
-
+					
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("dates-clients.fxml"));
 					loader.setController(this);
 					Parent load = loader.load();
