@@ -1,6 +1,7 @@
 package ui;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 
 import javax.swing.JOptionPane;
 
@@ -205,7 +206,7 @@ public class GameStoreGUI {
 	public GameStoreGUI() {
 
 	}
-
+	
 	public void payingGame() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("paying.fxml"));
 		loader.setController(this);
