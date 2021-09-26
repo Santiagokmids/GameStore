@@ -20,6 +20,5 @@ public class GameStore {
 	}
 	public void addClient(String code,String codeGame) {
 		client.add(new Client(code, codeGame));
-
 	}
 }

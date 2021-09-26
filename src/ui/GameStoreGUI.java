@@ -16,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import threads.Loading;
 
 public class GameStoreGUI {
 	@FXML
@@ -137,11 +138,60 @@ public class GameStoreGUI {
 	private int numberClients;
 	
 	private int contClients;
+	
+	@FXML
+    private ImageView selectGameBackground;
 
+    @FXML
+    private ImageView selectGameTitle;
+
+    @FXML
+    private ImageView selectGamesLeftStand;
+
+    @FXML
+    private ImageView selectGameMenChoosing;
+
+    @FXML
+    private ImageView selectGameWomanChoosing;
+
+    @FXML
+    private ImageView selectGameStandRigth;
+
+    @FXML
+    private ProgressIndicator selectGamesProgress;
+    
+    @FXML
+    private ImageView listLeft;
+
+    @FXML
+    private ImageView listRight;
+    
+	public void loadSelectGame() throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("selectGames.fxml"));
+		loader.setController(this);
+		Parent load = loader.load();
+		mainPane.getChildren().clear();
+		
+		Image image = new Image("/images/background.png");
+		selectGameBackground.setImage(image);
+		Image image1 = new Image("/images/selectGames.png");
+		selectGameTitle.setImage(image1);
+		Image image2 = new Image("/images/stand.png");
+		selectGamesLeftStand.setImage(image2);
+		Image image3 = new Image("/images/stand.png");
+		selectGameStandRigth.setImage(image3);
+		Image image4 = new Image("/images/man.png");
+		selectGameMenChoosing.setImage(image4);
+		Image image5 = new Image("/images/woman.png");
+		selectGameWomanChoosing.setImage(image5);
+		mainPane.setTop(load);
+		mainPane.setTop(load);
+		
+	}
 	public GameStoreGUI() {
 		
 	}
-
+	
 	@FXML
 	void addCustomer(ActionEvent event) throws IOException {
 		int idClients = 0;
@@ -484,19 +534,30 @@ public class GameStoreGUI {
 		mainPane.setTop(load);
 
 	}
-
 	@FXML
 	public void startSimul(MouseEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("short.fxml"));
-
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("sort.fxml"));
+		
 		loader.setController(this);
 		Parent load = loader.load();
 		mainPane.getChildren().clear();
-
+		
 		Image image = new Image("/images/background.png");
 		shortBackground.setImage(image);
 		Image image1 = new Image("/images/short.png");
 		shortTitle.setImage(image1);
+		Image image2 = new Image("/images/men.png");
+		shortMen.setImage(image2);
+		Image image3 = new Image("/images/women.png");
+		shortWoman.setImage(image3);
+		Image image4 = new Image("/images/list.png");
+		listLeft.setImage(image4);
+		Image image5 = new Image("/images/list.png");
+		listRight.setImage(image5);
 		mainPane.setTop(load);
+		Loading pc = new Loading(this,shortProgreesInd);
+		pc.start();
 	}
+
+	
 }

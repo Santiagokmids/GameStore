@@ -14,11 +14,7 @@
             <Image url="@../../../../Downloads/FOndosss.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="numSimulsTitle" fitHeight="402.0" fitWidth="761.0" layoutY="-79.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../Downloads/numDates.png" />
-         </image>
-      </ImageView>
+      <ImageView fx:id="numSimulsTitle" fitHeight="402.0" fitWidth="761.0" layoutY="-79.0" pickOnBounds="true" preserveRatio="true" />
       <TextField fx:id="numSimulsNum" alignment="CENTER" layoutX="328.0" layoutY="200.0" prefHeight="47.0" prefWidth="59.0" promptText="#">
          <font>
             <Font name="Berlin Sans FB Demi Bold" size="14.0" />
