@@ -1,17 +1,20 @@
 package dataStructures;
 
-public class Queue<E> {
+import model.IElementsOfStore;
+
+public class Queue<E> implements IElementsOfStore{
 	
 	private QueueNode<E> front;
 	private QueueNode<E> back;
 	
 	public Queue() {
-		createQueue();
+		create();
 	}
 	
-	public void createQueue() {
+	public boolean create() {
 		front = null;
 		back = null;
+		return true;
 	}
 	
 	public boolean dequeue() {
