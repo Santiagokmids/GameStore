@@ -2,23 +2,23 @@ package model;
 
 public class Game {
 	
-	private String code;
+	private int code;
 	private int price;
 	private int cuantity;
 	private String stand;
 	
-	public Game(String code, int price, int cuantity, String stand) {
+	public Game(int code, int price, int cuantity, String stand) {
 		this.code = code;
 		this.price = price;
 		this.cuantity = cuantity;
 		this.stand = stand;
 	}
 
-	public String getCode() {
+	public int getCode() {
 		return code;
 	}
 
-	public void setCode(String code) {
+	public void setCode(int code) {
 		this.code = code;
 	}
 

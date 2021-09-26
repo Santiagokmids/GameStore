@@ -17,6 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import model.Game;
 import model.GameStore;
 import threads.Load;
 import threads.Loading;
@@ -358,6 +359,10 @@ public class GameStoreGUI {
 					unitsGame.setText("");
 					unitsGame.setText("");
 				} else {
+					
+					Game game = new Game(codeGam, pricesGame, unitGame, standsName.getText());
+					
+					gameStore.getStands().get(contStand-1).getHash().inserTable(codeGam, game);
 
 					if(contGames < numGames) {
 						contGames++;
@@ -379,7 +384,9 @@ public class GameStoreGUI {
 						Image image1 = new Image("/images/numClients.png");
 						numClientsTitle.setImage(image1);
 						mainPane.setTop(load);
+						
 					}else {
+
 						if(contStand < standsCont) {
 							contStand++;
 							Platform.runLater(new Thread(){
@@ -422,9 +429,9 @@ public class GameStoreGUI {
 				} else {
 
 					gameStore.getStands().get(contStand-1).setName(standsName.getText());
-					gameStore.getStands().get(contStand-1).setHash(new HashTable<>(numGame));;
+					gameStore.getStands().get(contStand-1).setHash(new HashTable<>(numGame));
+					System.out.println(gameStore.getStands().get(contStand-1).getHash().lengthTable()+" a");
 
-					System.out.println(gameStore.getStands().get(contStand-1));
 					numGames = numGame;
 					contGames = 1;
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("games.fxml"));

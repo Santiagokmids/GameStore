@@ -3,53 +3,60 @@ package dataStructures;
 import model.IElementsOfStore;
 
 public class HashTable<K, V> implements IElementsOfStore, IHashTable<K, V>{
-	
+
 	private int sizeArray;
 	private HashNode<K, V>[] nodes;
-	private int sizeHashTable;
-	
+
 	public HashTable(int sizeArray) {
+		this.sizeArray = sizeArray;
 		create();
-		sizeHashTable = sizeArray;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean create() {
+		
 		nodes = (HashNode<K, V>[])(new HashNode[sizeArray]);
+		
+		System.out.println(sizeArray+" p");
+		
+		for (int i = 0; i < nodes.length; i++) {
+			nodes[i] = null;
+		}
+		
 		return true;
 	}
 
 	@Override
 	public boolean verifySpace() {
-		
+
 		boolean verify = true;
-		
+
 		for (int i = 0; i < nodes.length && verify; i++) {
 			if(nodes[i] != null) {
 				verify = false;
 			}
 		}
-		
+
 		return verify;
 	}
 
 	@Override
 	public int lengthTable() {
-		return sizeHashTable;
+		return sizeArray;
 	}
 
 	@Override
 	public boolean inserTable(K key, V value) {
-		
+
 		boolean verify = false;
 		HashNode<K, V> newNode = new HashNode<K, V>(key, value);
-		
-		Integer index = (Integer)key % sizeHashTable;
-		
+
+		Integer index = (Integer)key % sizeArray;
+
 		Integer i = index;
-		
-		while(i <= sizeHashTable && !verify) {
+
+		while(i <= sizeArray && !verify) {
 			
 			if(nodes[i] == null) {
 				verify = true;
@@ -58,17 +65,17 @@ public class HashTable<K, V> implements IElementsOfStore, IHashTable<K, V>{
 				i++;
 			}
 		}
-		
+
 		return verify;
 	}
 
 	@Override
 	public boolean deleteElement(K key) {
-		
+
 		boolean verify = false;
-		Integer i = (Integer)key % sizeHashTable;
-		
-		while(i <= sizeHashTable && !verify) {
+		Integer i = (Integer)key % sizeArray;
+
+		while(i <= sizeArray && !verify) {
 			if(nodes[i].getKey() == key) {
 				verify = true;
 				nodes[i] = null;
@@ -81,13 +88,13 @@ public class HashTable<K, V> implements IElementsOfStore, IHashTable<K, V>{
 
 	@Override
 	public V searchElement(K key) {
-		
+
 		boolean verify = false;
 		HashNode<K, V> newNode = new HashNode<K, V>(null, null);
-		Integer i = (Integer)key % sizeHashTable;
-		
-		while(i <= sizeHashTable && !verify) {
-			
+		Integer i = (Integer)key % sizeArray;
+
+		while(i <= sizeArray && !verify) {
+
 			if(nodes[i].getKey() == key) {
 				verify = true;
 				newNode = nodes[i];
@@ -95,7 +102,7 @@ public class HashTable<K, V> implements IElementsOfStore, IHashTable<K, V>{
 				i++;
 			}
 		}
-		
+
 		return newNode.getValue();
 	}
 
