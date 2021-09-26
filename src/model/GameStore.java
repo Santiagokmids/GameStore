@@ -1,6 +1,5 @@
 package model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class GameStore {
@@ -59,5 +58,17 @@ public class GameStore {
 	}
 	public void addClient(String code,String codeGame) {
 		client.add(new Client(code, codeGame));
+	}
+	
+	public boolean searchGame(int codeGame) {
+		boolean find = false;
+		
+		for(int i = 0;i < stands.size();i++) {
+			Game game = stands.get(i).getHash().searchElement(codeGame);
+			if(game != null) {
+				find = true;
+			}
+		}
+		return find;
 	}
 }
