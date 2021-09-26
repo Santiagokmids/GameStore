@@ -351,6 +351,7 @@ public class GameStoreGUI {
 							JOptionPane.WARNING_MESSAGE);
 					priceGame.setText("");
 					unitsGame.setText("");
+					unitsGame.setText("");
 				} else {
 
 					if(contGames < numGames) {
@@ -392,9 +393,9 @@ public class GameStoreGUI {
 			} catch (NumberFormatException nfe) {
 				priceGame.setText("");
 				unitsGame.setText("");
+				codeGame.setText("");
 				JOptionPane.showMessageDialog(null, "Debe ser un numero", "Error", JOptionPane.WARNING_MESSAGE);
 			}
-
 		}
 	}
 
