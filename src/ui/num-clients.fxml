@@ -25,7 +25,7 @@
             <Font name="Gill Sans MT Ext Condensed Bold" size="36.0" />
          </font>
       </Label>
-      <TextField fx:id="numClientsCode" alignment="CENTER" layoutX="321.0" layoutY="212.0" prefHeight="25.0" prefWidth="73.0" promptText="Clientes">
+      <TextField fx:id="numClients" alignment="CENTER" layoutX="321.0" layoutY="212.0" prefHeight="25.0" prefWidth="73.0" promptText="Clientes">
          <font>
             <Font name="Franklin Gothic Demi Cond" size="17.0" />
          </font>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -10,7 +11,13 @@
       <ImageView fx:id="startStoreTitle" fitHeight="389.0" fitWidth="715.0" layoutX="12.0" layoutY="-7.0" pickOnBounds="true" preserveRatio="true" />
       <Label layoutX="136.0" layoutY="354.0" text="* Presione select para agregar los parámetros con los que va a realizar la simulación" />
       <Label layoutX="239.0" layoutY="373.0" text="* Presione start para iniciar con la simulación" />
-      <ImageView fx:id="selectButton" fitHeight="17.0" fitWidth="51.0" layoutX="273.0" layoutY="272.0" onMouseClicked="#loadSimuls" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="startButton" fitHeight="17.0" fitWidth="51.0" layoutX="344.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="selectButton" fitHeight="17.0" fitWidth="51.0" layoutX="273.0" layoutY="272.0" onMouseClicked="#loadSimuls" pickOnBounds="true" preserveRatio="true">
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor></ImageView>
+      <ImageView fx:id="startButton" fitHeight="17.0" fitWidth="51.0" layoutX="344.0" layoutY="272.0" onMouseClicked="#startSimul" pickOnBounds="true" preserveRatio="true">
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor></ImageView>
    </children>
 </Pane>

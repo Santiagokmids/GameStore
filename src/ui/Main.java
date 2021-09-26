@@ -4,10 +4,11 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Main extends Application{
+	
 	private GameStoreGUI gameStore;
 	
 	public Main() {
@@ -25,10 +26,12 @@ public class Main extends Application{
 			fxmlLoader.setController(gameStore);
 			
 			Parent root = fxmlLoader.load();
-			
+			Image icon= new Image("/images/backgroundStart.png");
 			Scene scene = new Scene(root);
+			 scene.getStylesheets().add("/images/backgroundStart.png");
 			primaryStage.setScene(scene);
-			primaryStage.setTitle("Aliens Invaders");
+			primaryStage.getIcons().add(icon);
+			primaryStage.setTitle("Game Store");
 			primaryStage.setResizable(false);
 			primaryStage.show();
 			gameStore.loadApp();

@@ -8,18 +8,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="714.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="714.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="gameBackground" fitHeight="450.0" fitWidth="714.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../Downloads/FOndosss.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="gameTitle" fitHeight="420.0" fitWidth="756.0" layoutX="-16.0" layoutY="-104.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../Downloads/GAMES.png" />
-         </image>
-      </ImageView>
+      <ImageView fx:id="gameTitle" fitHeight="420.0" fitWidth="756.0" layoutX="-16.0" layoutY="-104.0" pickOnBounds="true" preserveRatio="true" />
       <Label alignment="CENTER" layoutX="14.0" layoutY="156.0" prefHeight="42.0" prefWidth="239.0" text="Código del juego #">
          <font>
             <Font name="Gill Sans MT Ext Condensed Bold" size="36.0" />
@@ -40,7 +36,7 @@
             <Font name="Franklin Gothic Demi Cond" size="17.0" />
          </font>
       </TextField>
-      <Button fx:id="addGame" layoutX="245.0" layoutY="276.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="224.0" style="-fx-background-color: black; -fx-background-radius: 15;" text="AGREGAR JUEGO" textFill="WHITE">
+      <Button layoutX="245.0" layoutY="276.0" mnemonicParsing="false" onAction="#addGame" prefHeight="40.0" prefWidth="224.0" style="-fx-background-color: black; -fx-background-radius: 15;" text="AGREGAR JUEGO" textFill="WHITE">
          <font>
             <Font name="Century" size="19.0" />
          </font>
