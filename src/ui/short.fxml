@@ -35,7 +35,7 @@
             <Font name="Book Antiqua" size="18.0" />
          </font>
       </Label>
-      <ProgressIndicator fx:id="shortProgreesInd" layoutX="334.0" layoutY="291.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0" prefWidth="45.0" progress="0.71">
+      <ProgressIndicator fx:id="shortProgreesInd" layoutX="334.0" layoutY="291.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0" prefWidth="45.0" progress="0.0">
          <cursor>
             <Cursor fx:constant="WAIT" />
          </cursor>
