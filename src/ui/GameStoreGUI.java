@@ -127,77 +127,91 @@ public class GameStoreGUI {
 	@FXML
 	private ProgressIndicator shortProgreesInd;
 
+	@FXML
+	private ImageView sortMethodBack;
+
+	@FXML
+	private ImageView sortMethodTitle;
+
+	@FXML
+	private ImageView sortImg;
 
 	private int standsCont;
-	
+
 	private int numGames;
 
 	private int contStand;
-	
+
 	private int contGames;
-	
+
 	private int numberClients;
-	
+
 	private int contClients;
-	
+
 	@FXML
-    private ImageView selectGameBackground;
+	private ImageView selectGameBackground;
 
-    @FXML
-    private ImageView selectGameTitle;
+	@FXML
+	private ImageView selectGameTitle;
 
-    @FXML
-    private ImageView selectGamesLeftStand;
+	@FXML
+	private ImageView selectGamesLeftStand;
 
-    @FXML
-    private ImageView selectGameMenChoosing;
+	@FXML
+	private ImageView selectGameMenChoosing;
 
-    @FXML
-    private ImageView selectGameWomanChoosing;
+	@FXML
+	private ImageView selectGameWomanChoosing;
 
-    @FXML
-    private ImageView selectGameStandRigth;
+	@FXML
+	private ImageView selectGameStandRigth;
 
-    @FXML
-    private ProgressIndicator selectGamesProgress;
-    
-    @FXML
-    private ImageView listLeft;
+	@FXML
+	private ProgressIndicator selectGamesProgress;
 
-    @FXML
-    private ImageView payingBackgroud;
+	@FXML
+	private ImageView listLeft;
 
-    @FXML
-    private ImageView payingTitle;
+	@FXML
+	private ImageView payingBackgroud;
 
-    @FXML
-    private ImageView payingCashier;
+	@FXML
+	private ImageView payingTitle;
 
-    @FXML
-    private ImageView payingQueue;
+	@FXML
+	private ImageView payingCashier;
 
-    @FXML
-    private Label payingLabelNumCashier;
+	@FXML
+	private ImageView payingQueue;
 
-    @FXML
-    private Label payingNumPeople;
+	@FXML
+	private Label payingLabelNumCashier;
 
-    @FXML
-    private Label money;
+	@FXML
+	private Label payingNumPeople;
 
-    @FXML
-    private ImageView listRight;
-    
-    public GameStoreGUI() {
-		
+	@FXML
+	private Label money;
+
+	@FXML
+	private ImageView listRight;
+
+	private boolean enter = false;
+
+	private int contSimuls;
+
+	private int numCashier;
+
+	public GameStoreGUI() {
+
 	}
-    
-    public void payingGame() throws IOException {
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("paying.fxml"));
+
+	public void payingGame() throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("paying.fxml"));
 		loader.setController(this);
 		Parent load = loader.load();
 		mainPane.getChildren().clear();
-		
+
 		Image image = new Image("/images/background.png");
 		payingBackgroud.setImage(image);
 		Image image1 = new Image("/images/paying.png");
@@ -207,14 +221,21 @@ public class GameStoreGUI {
 		Image image3 = new Image("/images/queue.png");
 		payingQueue.setImage(image3);
 		mainPane.setTop(load);
+
+		Platform.runLater(new Thread(){
+			public void run() {
+				payingLabelNumCashier.setText(numCashier+"");
+				payingNumPeople.setText(numberClients+"");
+			}
+		});
 	}
-    
+
 	public void loadSelectGame() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("selectGames.fxml"));
 		loader.setController(this);
 		Parent load = loader.load();
 		mainPane.getChildren().clear();
-		
+
 		Image image = new Image("/images/background.png");
 		selectGameBackground.setImage(image);
 		Image image1 = new Image("/images/selectGames.png");
@@ -232,12 +253,12 @@ public class GameStoreGUI {
 		Load pc = new Load(this,selectGamesProgress);
 		pc.start();
 	}
-	
+
 	@FXML
 	void addCustomer(ActionEvent event) throws IOException {
 		int idClients = 0;
 		String codesGame = txtCodesGamesClients.getText();
-		
+
 		if (txtIdClients.getText().equals("") || txtCodesGamesClients.getText().equals("")) {
 			JOptionPane.showMessageDialog(null, "Debe llenar los datos solicitados", "Error",
 					JOptionPane.WARNING_MESSAGE);
@@ -245,7 +266,7 @@ public class GameStoreGUI {
 			try {
 				idClients = Integer.parseInt(txtIdClients.getText());
 				if (idClients > 0) {
-					
+
 					if(contClients < numberClients) {
 						contClients++;
 						Platform.runLater(new Thread(){
@@ -257,6 +278,7 @@ public class GameStoreGUI {
 						txtCodesGamesClients.setText("");
 					}
 					else {
+						enter = true;
 						loadApp();
 					}
 
@@ -281,7 +303,7 @@ public class GameStoreGUI {
 			try {
 				int numClient = Integer.parseInt(numClients.getText());
 				if (numClient > 0) {
-					
+
 					numberClients = numClient;
 					contClients = 1;
 
@@ -330,7 +352,7 @@ public class GameStoreGUI {
 					priceGame.setText("");
 					unitsGame.setText("");
 				} else {
-					
+
 					if(contGames < numGames) {
 						contGames++;
 						Platform.runLater(new Thread(){
@@ -340,7 +362,7 @@ public class GameStoreGUI {
 						});
 						bucleWindowGame();
 					}
-					
+
 					else if(contStand == standsCont) {
 						FXMLLoader loader = new FXMLLoader(getClass().getResource("num-clients.fxml"));
 						loader.setController(this);
@@ -353,7 +375,7 @@ public class GameStoreGUI {
 						numClientsTitle.setImage(image1);
 						mainPane.setTop(load);
 					}
-						
+
 					else {
 						if(contStand < standsCont) {
 							contStand++;
@@ -394,7 +416,7 @@ public class GameStoreGUI {
 					standsNumGames.setText("");
 					standsName.setText("");
 				} else {
-					
+
 					numGames = numGame;
 					contGames = 1;
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("games.fxml"));
@@ -418,7 +440,7 @@ public class GameStoreGUI {
 		}
 
 	}
-	
+
 	public void bucleWindowClient() throws IOException {
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("dates-clients.fxml"));
@@ -432,7 +454,7 @@ public class GameStoreGUI {
 		imgDatesClients.setImage(image1);
 		mainPane.setTop(load);
 	}
-	
+
 	public void bucleWindowGame() throws IOException {
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("games.fxml"));
@@ -483,6 +505,7 @@ public class GameStoreGUI {
 					numDatesCashiers.setText("");
 				} else {
 
+					numCashier = numCashiers;
 					standsCont = numStand;
 					contStand = 1;
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("stands.fxml"));
@@ -525,6 +548,7 @@ public class GameStoreGUI {
 					numSimulsNum.setText("");
 				} else {
 
+					contSimuls = numSimul;
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("dates-simuls.fxml"));
 					loader.setController(this);
 					Parent load = loader.load();
@@ -562,27 +586,58 @@ public class GameStoreGUI {
 
 	@FXML
 	public void loadSimuls(MouseEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("num-Simuls.fxml"));
 
-		loader.setController(this);
-		Parent load = loader.load();
-		mainPane.getChildren().clear();
+		if(enter) {
+			JOptionPane.showMessageDialog(null, "Ya se ingresaron los datos de la simulación. Pulse START para iniciar.", "Error", JOptionPane.WARNING_MESSAGE);
+		}
+		else {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("num-Simuls.fxml"));
 
-		Image image = new Image("/images/background.png");
-		numSimulsBackground.setImage(image);
-		Image image1 = new Image("/images/numDates.png");
-		numSimulsTitle.setImage(image1);
-		mainPane.setTop(load);
+			loader.setController(this);
+			Parent load = loader.load();
+			mainPane.getChildren().clear();
 
+			Image image = new Image("/images/background.png");
+			numSimulsBackground.setImage(image);
+			Image image1 = new Image("/images/numDates.png");
+			numSimulsTitle.setImage(image1);
+			mainPane.setTop(load);
+		}
 	}
+
 	@FXML
-	public void startSimul(MouseEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("sort.fxml"));
+	public void selectSort(MouseEvent event) throws IOException {
 		
+		if(!enter) {
+			JOptionPane.showMessageDialog(null, "Antes de iniciar la simulación debe ingresar los datos. Para ello pulse select.", "Error", JOptionPane.WARNING_MESSAGE);
+		}
+		else {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("sortMethod.fxml"));
+
+			loader.setController(this);
+			Parent load = loader.load();
+			mainPane.getChildren().clear();
+
+			Image image = new Image("/images/background.png");
+			sortMethodBack.setImage(image);
+			Image image1 = new Image("/images/sortMethod.png");
+			sortMethodTitle.setImage(image1);
+			Image image2 = new Image("/images/listGame.png");
+			sortImg.setImage(image2);
+			mainPane.setTop(load);
+			enter = false;
+		}
+	}
+
+	@FXML
+	public void startSimul(ActionEvent event) throws IOException {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("sort.fxml"));
+
 		loader.setController(this);
 		Parent load = loader.load();
 		mainPane.getChildren().clear();
-		
+
 		Image image = new Image("/images/background.png");
 		shortBackground.setImage(image);
 		Image image1 = new Image("/images/short.png");
@@ -599,7 +654,7 @@ public class GameStoreGUI {
 		Loading pc = new Loading(this,shortProgreesInd);
 		pc.start();
 	}
-	
 
-	
+
+
 }

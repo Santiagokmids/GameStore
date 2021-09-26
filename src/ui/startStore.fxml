@@ -15,7 +15,7 @@
          <cursor>
             <Cursor fx:constant="OPEN_HAND" />
          </cursor></ImageView>
-      <ImageView fx:id="startButton" fitHeight="17.0" fitWidth="51.0" layoutX="344.0" layoutY="272.0" onMouseClicked="#startSimul" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="startButton" fitHeight="17.0" fitWidth="51.0" layoutX="344.0" layoutY="272.0" onMouseClicked="#selectSort" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="OPEN_HAND" />
          </cursor></ImageView>
