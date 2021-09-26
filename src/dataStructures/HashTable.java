@@ -51,9 +51,9 @@ public class HashTable<K, V, L> implements IElementsOfStore<L>, IHashTable<K, V>
 		
 		while(i <= sizeHashTable || !verify) {
 			
-			if(nodes[index] == null) {
+			if(nodes[i] == null) {
 				verify = true;
-				nodes[index] = newNode;
+				nodes[i] = newNode;
 			}else {
 				i++;
 			}
