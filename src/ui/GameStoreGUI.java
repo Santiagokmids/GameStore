@@ -2,6 +2,7 @@ package ui;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.util.Iterator;
 
 import javax.swing.JOptionPane;
 
@@ -20,6 +21,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import model.Game;
 import model.GameStore;
+import model.Stand;
 import threads.Load;
 import threads.Loading;
 
@@ -375,7 +377,6 @@ public class GameStoreGUI {
 				} else {
 					
 					Game game = new Game(codeGam, pricesGame, unitGame, standsName.getText());
-					
 					gameStore.getStands().get(contStand-1).getHash().inserTable(codeGam, game);
 
 					if(contGames < numGames) {
@@ -421,6 +422,20 @@ public class GameStoreGUI {
 			}
 		}
 	}
+	
+	public Stand search(String name) {
+		boolean stop = false;
+		Stand stand = null;
+		
+		for (int i = 0; i < gameStore.getStands().size() && !stop; i++) {
+			if(name.equalsIgnoreCase(gameStore.getStands().get(i).getName())) {
+				stop = true;
+				 stand = gameStore.getStands().get(i);
+			}
+		}
+		
+		return stand;
+	}
 
 	@FXML
 	void standsAddStands(ActionEvent event) throws IOException {
@@ -441,23 +456,31 @@ public class GameStoreGUI {
 					standsNumGames.setText("");
 					standsName.setText("");
 				} else {
+					
+					if(search(standsName.getText()) == null) {
+						
+						gameStore.getStands().get(contStand-1).setName(standsName.getText());
+						gameStore.getStands().get(contStand-1).setHash(new HashTable<>(numGame));
 
-					gameStore.getStands().get(contStand-1).setName(standsName.getText());
-					gameStore.getStands().get(contStand-1).setHash(new HashTable<>(numGame));
-					System.out.println(gameStore.getStands().get(contStand-1).getHash().lengthTable()+" a");
+						numGames = numGame;
+						contGames = 1;
+						FXMLLoader loader = new FXMLLoader(getClass().getResource("games.fxml"));
+						loader.setController(this);
+						Parent load = loader.load();
+						mainPane.getChildren().clear();
 
-					numGames = numGame;
-					contGames = 1;
-					FXMLLoader loader = new FXMLLoader(getClass().getResource("games.fxml"));
-					loader.setController(this);
-					Parent load = loader.load();
-					mainPane.getChildren().clear();
-
-					Image image = new Image("/images/background.png");
-					gameBackground.setImage(image);
-					Image image1 = new Image("/images/games.png");
-					gameTitle.setImage(image1);
-					mainPane.setTop(load);
+						Image image = new Image("/images/background.png");
+						gameBackground.setImage(image);
+						Image image1 = new Image("/images/games.png");
+						gameTitle.setImage(image1);
+						mainPane.setTop(load);
+						
+					} else {
+						JOptionPane.showMessageDialog(null, "El nombre de la estantería ya se encuentra registrado", "Error",
+								JOptionPane.WARNING_MESSAGE);
+						standsNumGames.setText("");
+						standsName.setText("");
+					}
 				}
 
 			} catch (NumberFormatException nfe) {

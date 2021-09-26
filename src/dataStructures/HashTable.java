@@ -15,15 +15,13 @@ public class HashTable<K, V> implements IElementsOfStore, IHashTable<K, V>{
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean create() {
-		
+
 		nodes = (HashNode<K, V>[])(new HashNode[sizeArray]);
-		
-		System.out.println(sizeArray+" p");
-		
+
 		for (int i = 0; i < nodes.length; i++) {
 			nodes[i] = null;
 		}
-		
+
 		return true;
 	}
 
@@ -51,16 +49,14 @@ public class HashTable<K, V> implements IElementsOfStore, IHashTable<K, V>{
 
 		boolean verify = false;
 		HashNode<K, V> newNode = new HashNode<K, V>(key, value);
+		int i = 0;
 
-		Integer index = (Integer)key % sizeArray;
+		while(i < sizeArray && !verify) {
+			Integer index = (((Integer)key) + i)% sizeArray;
 
-		Integer i = index;
-
-		while(i <= sizeArray && !verify) {
-			
-			if(nodes[i] == null) {
+			if(nodes[index] == null) {
 				verify = true;
-				nodes[i] = newNode;
+				nodes[index] = newNode;
 			}else {
 				i++;
 			}
@@ -73,12 +69,14 @@ public class HashTable<K, V> implements IElementsOfStore, IHashTable<K, V>{
 	public boolean deleteElement(K key) {
 
 		boolean verify = false;
-		Integer i = (Integer)key % sizeArray;
+		int i = 0;
 
 		while(i <= sizeArray && !verify) {
-			if(nodes[i].getKey() == key) {
+			Integer index = (((Integer)key) + i) % sizeArray;
+
+			if(nodes[index].getKey() == key) {
 				verify = true;
-				nodes[i] = null;
+				nodes[index] = null;
 			}else {
 				i++;
 			}
@@ -91,16 +89,18 @@ public class HashTable<K, V> implements IElementsOfStore, IHashTable<K, V>{
 
 		boolean verify = false;
 		HashNode<K, V> newNode = new HashNode<K, V>(null, null);
-		Integer i = (Integer)key % sizeArray;
+		int i = 0;
 
 		while(i <= sizeArray && !verify) {
+			Integer index = (((Integer)key) + i) % sizeArray;
 
-			if(nodes[i].getKey() == key) {
+			if(nodes[index].getKey() == key) {
 				verify = true;
-				newNode = nodes[i];
+				newNode = nodes[index];
 			}else {
 				i++;
 			}
+
 		}
 
 		return newNode.getValue();
