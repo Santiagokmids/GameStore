@@ -1,13 +1,15 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Client {
 	
 	private String code;
-	private String codeGame;
+	private ArrayList<Integer> codeGame;
 	
-	public Client(String code, String codeGame) {
+	public Client(String code, ArrayList<Integer> codeGame) {
 		this.code = code;
-		this.codeGame = codeGame;
+		this.setCodeGame(codeGame);
 	}
 
 	public String getCode() {
@@ -18,11 +20,13 @@ public class Client {
 		this.code = code;
 	}
 
-	public String getCodeGame() {
+	public ArrayList<Integer> getCodeGame() {
 		return codeGame;
 	}
 
-	public void setCodeGame(String codeGame) {
+	public void setCodeGame(ArrayList<Integer> codeGame) {
 		this.codeGame = codeGame;
 	}
+
+	
 }
