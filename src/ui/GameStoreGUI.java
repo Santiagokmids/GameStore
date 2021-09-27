@@ -1,12 +1,9 @@
 package ui;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.Iterator;
 
 import javax.swing.JOptionPane;
 
-import dataStructures.HashTable;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -724,4 +721,14 @@ public class GameStoreGUI {
 	public void setGameStore(GameStore gameStore) {
 		this.gameStore = gameStore;
 	}
+	
+	   @FXML
+	    void insertionBotton(ActionEvent event) {
+
+	    }
+
+	    @FXML
+	    void selectionBotton(ActionEvent event) {
+	    	gameStore.initializatedSelectionSort();
+	    }
 }

@@ -89,22 +89,39 @@ public class GameStore {
 			}
 		}
 	}
-
-	public static void selectionSort() {
-		for(int i = 0 ; i<(Nombre).lenth;i++) {
-			int min = (Nombre)[i];
-			for(int j = i+1;j <(Nombre).length;j++) {
-				if((Nombre)[j]<min) {
-					int tem = (Nombre)[j];
-					min = tem;
-				}
-			}
-			(Nombre)[i]= min;
-			
+	*/
+	
+	public void initializatedSelectionSort() {
+		for (int i = 0; i < client.size(); i++) {
+			selectionSort(client.get(i));
 		}
 	}
+
+	public void selectionSort(Client objClient) {
+		
+		Client newClient = objClient;
+		ArrayList<Game> newArray = objClient.getCodeGame();
+		
+		for(int i = 0 ; i < newArray.size(); i++) {
+			
+			Game min = newArray.get(i);
+			
+			for(int j = i+1; j < newArray.size(); j++) {
+				if(newArray.get(j).getStand().compareTo(min.getStand()) < 0) {
+					Game temp = newArray.get(j);
+					newArray.remove(j);
+					newArray.add(j, min);
+					min = temp;
+				}
+			}
+			newArray.remove(i);
+			newArray.add(i, min);
+		}
+		
+		newClient.setCodeGame(newArray);
+	}
 	
-	**/
+	
 	public ArrayList<Stand> getStands() {
 		return stands;
 	}
