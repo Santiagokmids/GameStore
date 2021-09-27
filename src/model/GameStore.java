@@ -80,13 +80,36 @@ public class GameStore {
 		client.add(new Client(code, clientGames));
 	}
 	
-	public static void insertionSort() {
-		for(int i = 1; i<(Nombre).length;i++) {
-			for(int j= i; j>0 && (Nombre)[j-1] >(Nombre)[j];j--) {
-				int tem = (Nombre)[j];
-				(Nombre)[j]= (Nombre)[j-1];
-				(Nombre)[j-1]= tem;
+	public void insertionSort(Client client) {
+		
+		for(int i = 1; i < client.getCodeGame().size();i++) {
+			
+			for(int j= i; j > 0 && compareStands(client.getCodeGame().get(j-1), client.getCodeGame().get(j)) == -1;j--) {
+				Game tem = client.getCodeGame().get(j);
+				client.getCodeGame().remove(j);
+				client.getCodeGame().add(j, client.getCodeGame().get(j-1));;
+				client.getCodeGame().remove(j-1);
+				client.getCodeGame().add(tem);
 			}
+		}
+	}
+	
+	public int compareStands(Game game1, Game game2) {
+		int number = 0;
+		
+		if(game1.getStand().compareTo(game2.getStand()) > -1) {
+			number = -1;
+			
+		}else if(game1.getStand().compareTo(game2.getStand()) > 1) {
+			number = 1;
+		}
+		
+		return number;
+	}
+	
+	public void getListOfClient(){
+		for(int i = 1; i < client.size();i++) {
+			insertionSort(client.get(i));
 		}
 	}
 
