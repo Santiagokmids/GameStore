@@ -142,6 +142,8 @@ public class GameStoreGUI {
 	private int standsCont;
 
 	private int numGames;
+	
+	public int amountGames;
 
 	private int contStand;
 
@@ -261,7 +263,7 @@ public class GameStoreGUI {
 
 	@FXML
 	void addCustomer(ActionEvent event) throws IOException {
-		
+
 		int idClients = 0;
 		String codesGame = txtCodesGamesClients.getText();
 
@@ -270,12 +272,12 @@ public class GameStoreGUI {
 					JOptionPane.WARNING_MESSAGE);
 		} else {
 			try {
-				
+
 				idClients = Integer.parseInt(txtIdClients.getText());
-				
+
 				boolean verify = gameStore.verifyGames(codesGame);	
 				boolean verifyGames = gameStore.checkTheGames(codesGame);
-				
+
 				if(!verify) {
 					JOptionPane.showMessageDialog(null, "Datos sobre los juegos inválidos, ingreselos de nuevo", "Error",
 							JOptionPane.WARNING_MESSAGE);
@@ -283,9 +285,9 @@ public class GameStoreGUI {
 					JOptionPane.showMessageDialog(null, "Alguno de los juegos ingresados no existe", "Error",
 							JOptionPane.WARNING_MESSAGE);
 				}else if(idClients > 0){
-					
+
 					gameStore.addClient(txtIdClients.getText());
-					
+
 					if(contClients < numberClients) {
 						contClients++;
 						Platform.runLater(new Thread(){
@@ -324,7 +326,7 @@ public class GameStoreGUI {
 
 					numberClients = numClient;
 					contClients = 1;
-					
+
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("dates-clients.fxml"));
 					loader.setController(this);
 					Parent load = loader.load();
@@ -380,7 +382,7 @@ public class GameStoreGUI {
 						codeGame.setText("");
 						priceGame.setText("");
 						unitsGame.setText("");
-						
+
 					}else {
 						Game game = new Game(codeGam, pricesGame, unitGame, standsName.getText());
 						gameStore.getStands().get(contStand-1).getHash().inserTable(codeGam, game);
@@ -393,7 +395,7 @@ public class GameStoreGUI {
 								}
 							});
 							bucleWindowGame();
-							
+
 						}else if(contStand == standsCont) {
 
 							FXMLLoader loader = new FXMLLoader(getClass().getResource("num-clients.fxml"));
@@ -467,10 +469,11 @@ public class GameStoreGUI {
 				} else {
 
 					if(search(standsName.getText()) == null) {
-						
+
 						gameStore.changeInformation(standsName.getText(), numGame, (contStand-1));
 
 						numGames = numGame;
+						amountGames += numGame;
 						contGames = 1;
 						FXMLLoader loader = new FXMLLoader(getClass().getResource("games.fxml"));
 						loader.setController(this);
@@ -722,13 +725,14 @@ public class GameStoreGUI {
 		this.gameStore = gameStore;
 	}
 	
-	   @FXML
-	    void insertionBotton(ActionEvent event) {
+	@FXML
+	public void insertionSort(ActionEvent event) throws IOException {
+		gameStore.getListOfClient();
+		startSimul(event);
+	}
 
-	    }
-
-	    @FXML
-	    void selectionBotton(ActionEvent event) {
-	    	gameStore.initializatedSelectionSort();
-	    }
+	@FXML
+	void selectionBotton(ActionEvent event) {
+		gameStore.initializatedSelectionSort();
+	}
 }
