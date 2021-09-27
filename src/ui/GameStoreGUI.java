@@ -728,7 +728,8 @@ public class GameStoreGUI {
 	    }
 
 	    @FXML
-	    void selectionBotton(ActionEvent event) {
+	    void selectionBotton(ActionEvent event) throws IOException {
 	    	gameStore.initializatedSelectionSort();
+	    	startSimul(event);
 	    }
 }
