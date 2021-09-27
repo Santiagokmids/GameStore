@@ -129,9 +129,7 @@ public class GameStore {
 			newArray.remove(i);
 			newArray.add(i, min);
 		}
-
 		newClient.setCodeGame(newArray);
-		System.out.println(newArray.toString());
 	}
 
 

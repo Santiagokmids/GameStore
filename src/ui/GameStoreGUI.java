@@ -142,7 +142,7 @@ public class GameStoreGUI {
 	private int standsCont;
 
 	private int numGames;
-	
+
 	public int amountGames;
 
 	private int contStand;
@@ -724,15 +724,16 @@ public class GameStoreGUI {
 	public void setGameStore(GameStore gameStore) {
 		this.gameStore = gameStore;
 	}
-	
+
 	@FXML
 	public void insertionSort(ActionEvent event) throws IOException {
 		gameStore.getListOfClient();
 		startSimul(event);
 	}
-
+	
 	@FXML
-	void selectionBotton(ActionEvent event) {
+	void selectionBotton(ActionEvent event) throws IOException {
 		gameStore.initializatedSelectionSort();
+		startSimul(event);
 	}
 }
