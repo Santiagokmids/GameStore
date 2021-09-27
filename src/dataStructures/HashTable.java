@@ -49,7 +49,7 @@ public class HashTable<K, V> implements IElementsOfStore, IHashTable<K, V>{
 
 		boolean verify = false;
 		HashNode<K, V> newNode = new HashNode<K, V>(key, value);
-		int i = 0;
+		Integer i = 0;
 
 		while(i < sizeArray && !verify) {
 			Integer index = (((Integer)key) + i)% sizeArray;
@@ -74,7 +74,7 @@ public class HashTable<K, V> implements IElementsOfStore, IHashTable<K, V>{
 		while(i < sizeArray && !verify) {
 			Integer index = (((Integer)key) + i) % sizeArray;
 
-			if(nodes[index].getKey() == key) {
+			if(nodes[index].getKey().equals(key)) {
 				verify = true;
 				nodes[index] = null;
 			}else {
@@ -89,13 +89,14 @@ public class HashTable<K, V> implements IElementsOfStore, IHashTable<K, V>{
 
 		boolean verify = false;
 		HashNode<K, V> newNode = new HashNode<K, V>(null, null);
-		int i = 0;
-
+		Integer i = 0;
+		
 		while(i < sizeArray && !verify) {
 			
 			Integer index = (((Integer)key) + i) % sizeArray;
-
-			if(nodes[index] != null && nodes[index].getKey() == key) {
+			
+			if(nodes[index] != null && nodes[index].getKey().equals(key)) {
+				
 				verify = true;
 				newNode = nodes[index];
 			}else {

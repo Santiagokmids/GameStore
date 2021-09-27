@@ -40,23 +40,17 @@ public class GameStore {
 	public boolean checkTheGames(String txtGames) {
 		
 		boolean verify = false;
-		boolean verifyGames;
 		
 		String[] games = txtGames.split(";");
 		int contGamesFinds = 0;
 		try {
 			for (int i = 0; i < stands.size() && !verify; i++) {
 				
-				verifyGames = false;
-				
-				for (int j = 0; j < games.length && !verifyGames; j++) {
+				for (int j = 0; j < games.length ; j++) {
 					
 					Game game = stands.get(i).getHash().searchElement(Integer.parseInt(games[j]));
 					
-					System.out.println(game.getCode());
-					
 					if(game != null) {
-						verifyGames = true;
 						contGamesFinds++;
 					}
 				}
