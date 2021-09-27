@@ -119,6 +119,7 @@ public class GameStore {
 		}
 		
 		newClient.setCodeGame(newArray);
+		System.out.println(newArray.toString());
 	}
 	
 	
