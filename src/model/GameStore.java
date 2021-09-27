@@ -73,7 +73,7 @@ public class GameStore {
 		stands.get(index).setHash(new HashTable<>(numGame));
 	}
 	
-	public void addClient(String code,String codeGame) {
+	public void addClient(String code,ArrayList<Integer> codeGame) {
 		client.add(new Client(code, codeGame));
 	}
 	
