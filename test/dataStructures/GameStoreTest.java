@@ -36,13 +36,11 @@ class GameStoreTest {
 	public void setupScenary5() {
 		queue = new Queue<>();
 		String code = "4444654";
-		String codeGame = "9876,6543";
 		setupScenary4();
 		ArrayList<Game> list = new ArrayList<Game>();
 		list.add(new Game (12312,12312,123123,"A"));
 		list.add(new Game (21412,12312,123123,"A"));
 		String code2 = "6543365";
-		String codeGame2 = "1234,3333";
 		Client client = new Client(code, list);
 		list.clear();
 		list.add(new Game (123124,12312,123123,"A"));
