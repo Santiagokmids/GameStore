@@ -70,4 +70,11 @@ public class Queue<E> implements IElementsOfStore{
 		
 		return verify;
 	}
+	
+	public QueueNode<E> getFront(){
+		return front;
+	}
+	public QueueNode<E> getBack(){
+		return back;
+	}
 }

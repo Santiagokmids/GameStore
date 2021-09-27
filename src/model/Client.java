@@ -27,6 +27,4 @@ public class Client {
 	public void setCodeGame(ArrayList<Game> codeGame) {
 		this.codeGame = codeGame;
 	}
-
-	
 }

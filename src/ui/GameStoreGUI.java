@@ -470,9 +470,8 @@ public class GameStoreGUI {
 				} else {
 
 					if(search(standsName.getText()) == null) {
-
-						gameStore.getStands().get(contStand-1).setName(standsName.getText());
-						gameStore.getStands().get(contStand-1).setHash(new HashTable<>(numGame));
+						
+						gameStore.changeInformation(standsName.getText(), numGame, (contStand-1));
 
 						numGames = numGame;
 						contGames = 1;
