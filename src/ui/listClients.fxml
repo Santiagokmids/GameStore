@@ -22,12 +22,12 @@
       </ImageView>
       <TableView layoutX="43.0" layoutY="114.0" prefHeight="214.0" prefWidth="507.0">
         <columns>
-          <TableColumn fx:id="listClientsCode" prefWidth="145.0" text="Cédula" />
-          <TableColumn fx:id="listClientsValue" prefWidth="154.0" text="Valor de la compra" />
-            <TableColumn fx:id="listClientsCodeGame" prefWidth="210.0" text="Código de los juegos adquiridos" />
+          <TableColumn fx:id="listClientsCode" prefWidth="142.0" text="Cédula" />
+          <TableColumn fx:id="listClientsValue" prefWidth="142.0" text="Valor de la compra" />
+            <TableColumn fx:id="listClientsCodeGame" prefWidth="222.0" text="Código de los juegos adquiridos" />
         </columns>
       </TableView>
-      <Button fx:id="listClientsFinish" layoutX="252.0" layoutY="337.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="254.0" style="-fx-background-color: black; -fx-background-radius: 15;" text="Terminar caso de prueba" textFill="WHITE">
+      <Button fx:id="listClientsFinish" layoutX="252.0" layoutY="346.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="254.0" style="-fx-background-color: black; -fx-background-radius: 15;" text="Terminar caso de prueba" textFill="WHITE">
          <font>
             <Font name="Century" size="19.0" />
          </font>

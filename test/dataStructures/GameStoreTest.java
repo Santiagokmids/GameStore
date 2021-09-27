@@ -38,8 +38,8 @@ class GameStoreTest {
 		String code = "4444654";
 		setupScenary4();
 		ArrayList<Game> list = new ArrayList<Game>();
-		list.add(new Game (12312,12312,123123,"A"));
-		list.add(new Game (21412,12312,123123,"A"));
+		list.add(new Game (9876,2000,1,"A"));
+		list.add(new Game (1234,10000,5,"A"));
 		String code2 = "6543365";
 		Client client = new Client(code, list);
 		list.clear();
@@ -50,7 +50,6 @@ class GameStoreTest {
 		QueueNode<Client> clientNode2 = new QueueNode<Client>(client2);
 		queue.enqueue(clientNode);
 		queue.enqueue(clientNode2);
-
 	}
 
 	public void setupScenary6() {
@@ -111,19 +110,19 @@ class GameStoreTest {
 	void testValidateAddObjet() {
 		setupScenary4();
 		ArrayList<Game> list = new ArrayList<Game>();
-		list.add(new Game (12312,12312,123123,"A"));
-		list.add(new Game (21412,12312,123123,"A"));
-	Client client = new Client("4444654", list);
-	clientNode = new QueueNode<Client>(client);
-	queue.enqueue(clientNode);
-	assertEquals("4444654", queue.getFront().getElement().getCode());
-	list.clear();
-	list.add(new Game (123124,12312,123123,"A"));
-	list.add(new Game (1012,12312,123123,"A"));
-	Client client2 = new Client("6543365", list);
-	clientNode = new QueueNode<Client>(client2);
-	queue.enqueue(clientNode);
-	assertEquals("6543365", queue.getBack().getElement().getCode());
+		list.add(new Game (1234,12312,123123,"A"));
+		list.add(new Game (6543,12312,123123,"A"));
+		Client client = new Client("6998987", list);
+		clientNode = new QueueNode<Client>(client);
+		queue.enqueue(clientNode);
+		assertEquals("6998987", queue.getFront().getElement().getCode());
+		list.clear();
+		list.add(new Game (6669,12312,123123,"A"));
+		list.add(new Game (33354,12312,123123,"A"));
+		Client client2 = new Client("65459876", list);
+		clientNode = new QueueNode<Client>(client2);
+		queue.enqueue(clientNode);
+		assertEquals("65459876", queue.getBack().getElement().getCode());
 	}
 
 	@Test
@@ -156,7 +155,7 @@ class GameStoreTest {
 	void testValidRemoveObjectStack() {
 		setupScenary7();
 		assertEquals(895, game.pop().getElement().getCode());;
-	
+
 	}
 	@Test
 	void testValidateStackIsEmpty() {
@@ -185,7 +184,7 @@ class GameStoreTest {
 		int key = 996;
 		assertTrue(hashTable.deleteElement(key));
 	}
-	
+
 	@Test
 	void testSearchElementHashTable() {
 		setupScenary9();

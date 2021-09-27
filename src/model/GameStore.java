@@ -10,11 +10,15 @@ public class GameStore {
 	public ArrayList<Stand>stands = new ArrayList<>();
 	private ArrayList<Client>client;
 	private ArrayList<Game>clientGames;
-	private ArrayList<Stack>stacks;
+	private Client clientsOfInsertion;
+	private Client clientsOfSelection;
+	private ArrayList<Stack<Game>>stacks;
+	private ArrayList<Long> times;
 
 	public GameStore() {
 		client = new ArrayList<>();
 		stacks = new ArrayList<>();
+		times = new ArrayList<>();
 	}
 
 	public void createStand(int numberStand) {
@@ -84,28 +88,52 @@ public class GameStore {
 	}
 
 	public void insertionSort(Client clients) {
-		
+
 		for(int i = 1; i < clients.getCodeGame().size();i++) {
 
 			for(int j= i; j > 0 && clients.getCodeGame().get(j-1).getStand().compareTo(clients.getCodeGame().get(j).getStand()) > 0;j--) {
-				
+
 				Game tem = clients.getCodeGame().get(j);
 				clients.getCodeGame().set(j, clients.getCodeGame().get(j-1));
 				clients.getCodeGame().set(j-1,tem);
 			}
 		}
-		
+		clientsOfInsertion = clients;
+	}
+
+	public void addStackInsertion() {
+
+		Stack<Game> stack = new Stack<>();
+
+		for(int i = 0; i < clientsOfInsertion.getCodeGame().size();i++) {
+			stack.push(clientsOfInsertion.getCodeGame().get(i));
+		}
+		stacks.add(stack);	
 	}
 
 	public void getListOfClient(){
 		for(int i = 0; i < client.size();i++) {
+			long start = System.currentTimeMillis();
 			insertionSort(client.get(i));
+			addStackInsertion();
+			long end = System.currentTimeMillis();
+			Long total = end - start;
+			total += calculateTimeInsertion();
+			times.add(total);
+			client.get(i).calculatePrice();
 		}
 	}
 
 	public void initializatedSelectionSort() {
 		for (int i = 0; i < client.size(); i++) {
+			long start = System.currentTimeMillis();
 			selectionSort(client.get(i));
+			addStackSelection();
+			long end = System.currentTimeMillis();
+			Long total = end - start;
+			total += calculateTimeSelection();
+			times.add(total);
+			client.get(i).calculatePrice();
 		}
 	}
 
@@ -130,8 +158,45 @@ public class GameStore {
 			newArray.add(i, min);
 		}
 		newClient.setCodeGame(newArray);
+		
+		clientsOfSelection = newClient;
 	}
 
+	public void addStackSelection() {
+
+		Stack<Game> stack = new Stack<>();
+
+		for(int i = 0; i < clientsOfSelection.getCodeGame().size();i++) {
+			stack.push(clientsOfSelection.getCodeGame().get(i));
+		}
+		stacks.add(stack);	
+	}
+	
+	public Long calculateTimeInsertion() {
+		Long total = (long) 0;
+		String letter = "";
+		for (int i = 0; i < clientsOfInsertion.getCodeGame().size(); i++) {
+			
+			if(!letter.equalsIgnoreCase(clientsOfInsertion.getCodeGame().get(i).getStand())) {
+				letter = clientsOfInsertion.getCodeGame().get(i).getStand();
+				total += 10;
+			}
+		}
+		return total;
+	}
+	
+	public Long calculateTimeSelection() {
+		Long total = (long) 0;
+		String letter = "";
+		for (int i = 0; i < clientsOfSelection.getCodeGame().size(); i++) {
+			
+			if(!letter.equalsIgnoreCase(clientsOfSelection.getCodeGame().get(i).getStand())) {
+				letter = clientsOfSelection.getCodeGame().get(i).getStand();
+				total += 10;
+			}
+		}
+		return total;
+	}
 
 	public ArrayList<Stand> getStands() {
 		return stands;
