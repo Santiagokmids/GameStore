@@ -107,7 +107,7 @@ class GameStoreTest {
 	}
 
 	@Test
-	void testValidateAddObjet() {
+	void testValidateAddObject() {
 		setupScenary4();
 		ArrayList<Game> list = new ArrayList<Game>();
 		list.add(new Game (1234,12312,123123,"A"));
@@ -145,7 +145,7 @@ class GameStoreTest {
 	}
 
 	@Test
-	void testAddObjetctStack() {
+	void testAddObjectStack() {
 		setupScenary6();
 		Game gm = new Game (21312,1321,2,"A");
 		game.push(gm);
