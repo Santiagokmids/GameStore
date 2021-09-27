@@ -79,7 +79,7 @@ public class GameStore {
 	public void addClient(String code) {
 		client.add(new Client(code, clientGames));
 	}
-	
+	/**
 	public static void insertionSort() {
 		for(int i = 1; i<(Nombre).length;i++) {
 			for(int j= i; j>0 && (Nombre)[j-1] >(Nombre)[j];j--) {
@@ -104,6 +104,7 @@ public class GameStore {
 		}
 	}
 	
+	**/
 	public ArrayList<Stand> getStands() {
 		return stands;
 	}

@@ -1,6 +1,9 @@
 package dataStructures;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import model.Client;
@@ -34,11 +37,17 @@ class GameStoreTest {
 		queue = new Queue<>();
 		String code = "4444654";
 		String codeGame = "9876,6543";
-
+		setupScenary4();
+		ArrayList<Game> list = new ArrayList<Game>();
+		list.add(new Game (12312,12312,123123,"A"));
+		list.add(new Game (21412,12312,123123,"A"));
 		String code2 = "6543365";
 		String codeGame2 = "1234,3333";
-		Client client = new Client(code, codeGame);
-		Client client2 = new Client(code2, codeGame2);
+		Client client = new Client(code, list);
+		list.clear();
+		list.add(new Game (123124,12312,123123,"A"));
+		list.add(new Game (1012,12312,123123,"A"));
+		Client client2 = new Client(code2, list);
 		QueueNode<Client> clientNode = new QueueNode<Client>(client);
 		QueueNode<Client> clientNode2 = new QueueNode<Client>(client2);
 		queue.enqueue(clientNode);
@@ -103,16 +112,20 @@ class GameStoreTest {
 	@Test
 	void testValidateAddObjet() {
 		setupScenary4();
-		Client client = new Client("4444654", "1234,6543");
-		clientNode = new QueueNode<Client>(client);
-		queue.enqueue(clientNode);
-		assertEquals("4444654", queue.getFront().getElement().getCode());
-
-		Client client2 = new Client("6543365", "6669,33354");
-		clientNode = new QueueNode<Client>(client2);
-		queue.enqueue(clientNode);
-		assertEquals("6543365", queue.getBack().getElement().getCode());
-
+		ArrayList<Game> list = new ArrayList<Game>();
+		list.add(new Game (12312,12312,123123,"A"));
+		list.add(new Game (21412,12312,123123,"A"));
+	Client client = new Client("4444654", list);
+	clientNode = new QueueNode<Client>(client);
+	queue.enqueue(clientNode);
+	assertEquals("4444654", queue.getFront().getElement().getCode());
+	list.clear();
+	list.add(new Game (123124,12312,123123,"A"));
+	list.add(new Game (1012,12312,123123,"A"));
+	Client client2 = new Client("6543365", list);
+	clientNode = new QueueNode<Client>(client2);
+	queue.enqueue(clientNode);
+	assertEquals("6543365", queue.getBack().getElement().getCode());
 	}
 
 	@Test
