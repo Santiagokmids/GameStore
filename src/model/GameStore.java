@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+import dataStructures.HashTable;
+
 public class GameStore {
 	
 	public ArrayList<Stand>stands = new ArrayList<>();
@@ -64,6 +66,11 @@ public class GameStore {
 		}
 		
 		return verify;
+	}
+	
+	public void changeInformation(String name, Integer numGame, int index) {
+		stands.get(index).setName(name);
+		stands.get(index).setHash(new HashTable<>(numGame));
 	}
 	
 	public void addClient(String code,String codeGame) {
