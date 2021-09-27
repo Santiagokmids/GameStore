@@ -60,22 +60,22 @@ class GameStoreTest {
 	}
 
 	public void setupScenary7() {
-		String code = "955";
-		int price = 10000;
-		int cuantity = 5;
-		String stand = "A";
-
-		String code2 = "895";
-		int price2 = 13500;
-		int cuantity2 = 2;
-		String stand2 = "B";
-
-		// gameStore.addVideoGame(code,price,cuantity,stand);
-		// gameStore.addVideoGame(code2,price2,cuantity2,stand2);
+		game = new Stack<>();
+		Game gm1 = new Game(955,1000,5,"A");
+		Game gm2 = new Game (895,13500,2,"B");
+		game.push(gm1);
+		game.push(gm2);
 	}
 
 	public void setupScenary8() {
-		// gameStore.addHastTable();
+		hashTable= new HashTable<Integer, Game>(5);
+	}
+	public void setupScenary9() {
+		hashTable= new HashTable<Integer, Game>(5);
+		Game gm = new Game(996,1300,4,"A");
+		Game gm2 = new Game(995,6000,6,"B");
+		hashTable.inserTable(996, gm);
+		hashTable.inserTable(995, gm2);
 	}
 
 	@Test
@@ -153,5 +153,45 @@ class GameStoreTest {
 		Game gm = new Game (21312,1321,2,"A");
 		game.push(gm);
 		assertEquals(21312, game.top().getElement().getCode());
+	}
+	@Test
+	void testValidRemoveObjectStack() {
+		setupScenary7();
+		assertEquals(895, game.pop().getElement().getCode());;
+	
+	}
+	@Test
+	void testValidateStackIsEmpty() {
+		setupScenary6();
+		assertTrue(game.isEmpty());
+	}
+	@Test
+	void testValidateHashTableIsEmpty() {
+		setupScenary8();
+		assertTrue(hashTable.verifySpace());
+	}
+	@Test
+	void testValidateHashTableSize() {
+		setupScenary8();
+		assertEquals(5, hashTable.getSizeArray());
+	}
+	@Test
+	void testValidateHashTableCreateElement() {
+		setupScenary8();
+		Game gm = new Game(925,7500,2,"B");
+		assertTrue(hashTable.inserTable(925, gm));
+	}
+	@Test
+	void testRemoveElementHashTable() {
+		setupScenary9();
+		int key = 996;
+		assertTrue(hashTable.deleteElement(key));
+	}
+	
+	@Test
+	void testSearchElementHashTable() {
+		setupScenary9();
+		int key = 996;
+		assertEquals(key,hashTable.searchElement(key).getCode());
 	}
 }
