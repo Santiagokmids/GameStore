@@ -38,7 +38,12 @@ public class Loading extends Thread{
 	}
 	private void delay() {
 		try {
-			Thread.sleep(100);
+			if(gameStore.amountGames > 7) {
+				Thread.sleep(700);
+				
+			}else {
+				Thread.sleep(50*gameStore.amountGames);
+			}
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -25,7 +25,7 @@
             <Cursor fx:constant="CLOSED_HAND" />
          </cursor>
       </Button>
-      <Button layoutX="422.0" layoutY="314.0" mnemonicParsing="false" onAction="#insertionBotton" prefHeight="40.0" prefWidth="185.0" style="-fx-background-color: black; -fx-background-radius: 15;" text="Inserción" textFill="WHITE">
+      <Button layoutX="422.0" layoutY="314.0" mnemonicParsing="false" onAction="#insertionSort" prefHeight="40.0" prefWidth="185.0" style="-fx-background-color: black; -fx-background-radius: 15;" text="Inserción" textFill="WHITE">
          <font>
             <Font name="Century" size="19.0" />
          </font>

@@ -3,15 +3,18 @@ package model;
 import java.util.ArrayList;
 
 import dataStructures.HashTable;
+import dataStructures.Stack;
 
 public class GameStore {
 
 	public ArrayList<Stand>stands = new ArrayList<>();
 	private ArrayList<Client>client;
 	private ArrayList<Game>clientGames;
+	private ArrayList<Stack>stacks;
 
 	public GameStore() {
 		client = new ArrayList<>();
+		stacks = new ArrayList<>();
 	}
 
 	public void createStand(int numberStand) {
@@ -80,39 +83,24 @@ public class GameStore {
 		client.add(new Client(code, clientGames));
 	}
 
-	public void insertionSort(Client client) {
+	public void insertionSort(Client clients) {
+		
+		for(int i = 1; i < clients.getCodeGame().size();i++) {
 
-		for(int i = 1; i < client.getCodeGame().size();i++) {
-
-			for(int j= i; j > 0 && compareStands(client.getCodeGame().get(j-1), client.getCodeGame().get(j)) == -1;j--) {
-				Game tem = client.getCodeGame().get(j);
-				client.getCodeGame().remove(j);
-				client.getCodeGame().add(j, client.getCodeGame().get(j-1));;
-				client.getCodeGame().remove(j-1);
-				client.getCodeGame().add(tem);
+			for(int j= i; j > 0 && clients.getCodeGame().get(j-1).getStand().compareTo(clients.getCodeGame().get(j).getStand()) > 0;j--) {
+				
+				Game tem = clients.getCodeGame().get(j);
+				clients.getCodeGame().set(j, clients.getCodeGame().get(j-1));
+				clients.getCodeGame().set(j-1,tem);
 			}
 		}
-	}
-
-	public int compareStands(Game game1, Game game2) {
-		int number = 0;
-
-		if(game1.getStand().compareTo(game2.getStand()) > -1) {
-			number = -1;
-
-		}else if(game1.getStand().compareTo(game2.getStand()) > 1) {
-			number = 1;
-		}
-
-		return number;
+		
 	}
 
 	public void getListOfClient(){
-		for(int i = 1; i < client.size();i++) {
+		for(int i = 0; i < client.size();i++) {
 			insertionSort(client.get(i));
-
 		}
-
 	}
 
 	public void initializatedSelectionSort() {
