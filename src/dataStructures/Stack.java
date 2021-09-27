@@ -37,6 +37,7 @@ public class Stack<T> {
 		
 		if(top == null) {
 			top = newNode;
+			verify = true;
 		}else {
 			newNode.setNext(top);
 			top = newNode;
