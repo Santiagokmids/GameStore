@@ -287,7 +287,7 @@ public class GameStoreGUI {
 							JOptionPane.WARNING_MESSAGE);
 				}else if(idClients > 0){
 					
-					gameStore.addClient(txtIdClients.getText(),txtCodesGamesClients.getText());
+					gameStore.addClient(txtIdClients.getText());
 					
 					if(contClients < numberClients) {
 						contClients++;

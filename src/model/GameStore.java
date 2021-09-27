@@ -6,6 +6,7 @@ public class GameStore {
 	
 	public ArrayList<Stand>stands = new ArrayList<>();
 	private ArrayList<Client>client;
+	private ArrayList<Game>clientGames;
 	
 	public GameStore() {
 		client = new ArrayList<>();
@@ -40,10 +41,10 @@ public class GameStore {
 	public boolean checkTheGames(String txtGames) {
 		
 		boolean verify = false;
-		
 		String[] games = txtGames.split(";");
 		int contGamesFinds = 0;
 		try {
+			clientGames = new ArrayList<Game>();
 			for (int i = 0; i < stands.size() && !verify; i++) {
 				
 				for (int j = 0; j < games.length ; j++) {
@@ -52,11 +53,13 @@ public class GameStore {
 					
 					if(game != null) {
 						contGamesFinds++;
+						clientGames.add(game);
 					}
 				}
 				
 				if(contGamesFinds == games.length) {
 					verify = true;
+					
 				}
 			}
 			
@@ -66,8 +69,8 @@ public class GameStore {
 		return verify;
 	}
 	
-	public void addClient(String code,String codeGame) {
-		client.add(new Client(code, codeGame));
+	public void addClient(String code) {
+		client.add(new Client(code, clientGames));
 	}
 	
 	public static void insertionSort() {
