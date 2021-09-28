@@ -36,7 +36,6 @@ class GameStoreTest {
 	public void setupScenary5() {
 		queue = new Queue<>();
 		String code = "4444654";
-		setupScenary4();
 		ArrayList<Game> list = new ArrayList<Game>();
 		list.add(new Game (9876,2000,1,"A"));
 		list.add(new Game (1234,10000,5,"A"));
