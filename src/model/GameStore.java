@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 
 import dataStructures.HashTable;
+import dataStructures.Queue;
+import dataStructures.QueueNode;
 import dataStructures.Stack;
 
 public class GameStore {
@@ -13,12 +15,15 @@ public class GameStore {
 	private Client clientsOfInsertion;
 	private Client clientsOfSelection;
 	private ArrayList<Stack<Game>>stacks;
+
 	private ArrayList<Long> times;
+	private Queue<Client> queue;
 
 	public GameStore() {
 		client = new ArrayList<>();
 		stacks = new ArrayList<>();
 		times = new ArrayList<>();
+		queue = new Queue<>();
 	}
 
 	public void createStand(int numberStand) {
@@ -161,6 +166,25 @@ public class GameStore {
 		
 		clientsOfSelection = newClient;
 	}
+	
+	public void addQueue() {
+		int contQueue = 0;
+				
+		for (int i = 0; i < times.size(); i++) {
+			int cont = 0;
+			for (int j = 0; j < times.size(); j++) {
+				if(times.get(i) < times.get(j)) {
+					cont++;
+				}
+			}
+			if(cont == times.size()) {
+				times.remove(i);
+				queue.enqueue(new QueueNode<Client>(client.get(i)));
+				stacks.set(contQueue, stacks.get(i));
+				contQueue++;
+			}
+		}
+	}
 
 	public void addStackSelection() {
 
@@ -228,5 +252,21 @@ public class GameStore {
 			}
 		}
 		return find;
+	}
+	
+	public Queue<Client> getQueue() {
+		return queue;
+	}
+
+	public void setQueue(Queue<Client> queue) {
+		this.queue = queue;
+	}
+	
+	public ArrayList<Stack<Game>> getStacks() {
+		return stacks;
+	}
+
+	public void setStacks(ArrayList<Stack<Game>> stacks) {
+		this.stacks = stacks;
 	}
 }

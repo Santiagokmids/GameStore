@@ -1,6 +1,7 @@
 package ui;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
@@ -16,9 +17,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import model.Client;
 import model.Game;
 import model.GameStore;
 import model.Stand;
+import threads.Cashier;
 import threads.Load;
 import threads.Loading;
 
@@ -208,9 +211,11 @@ public class GameStoreGUI {
 	private int numCashier;
 
 	private GameStore gameStore;
+	private ArrayList<Cashier> cashiers;
 
 	public GameStoreGUI() {
 		gameStore = new GameStore();
+		cashiers = new ArrayList<>();
 	}
 
 	public void payingGame() throws IOException {
@@ -235,6 +240,54 @@ public class GameStoreGUI {
 				payingNumPeople.setText(numberClients+"");
 			}
 		});
+		
+		addClientsToCashiers();
+	}
+	
+	public void clientToCashier(Cashier cashier) {
+		
+		if(gameStore.getQueue().isEmpty()) {
+			
+			cashier.setClient(gameStore.getQueue().getFront().getElement());
+			cashier.setStack(gameStore.getStacks().get(0));
+			cashier.start();
+			
+			Platform.runLater(new Thread(){
+				public void run() {
+					numCashier--;
+					numberClients--;
+					money.setText("$"+gameStore.getQueue().getFront().getElement().getPrice());
+					payingLabelNumCashier.setText(numCashier+"");
+					payingNumPeople.setText(numberClients+"");
+				}
+			});
+			gameStore.getStacks().remove(0);
+			gameStore.getQueue().dequeue();
+			
+		}else {
+			
+		}
+	}
+	
+	public void addClientsToCashiers() {
+		
+		for (int i = 0; i < cashiers.size(); i++) {
+			cashiers.get(i).setClient(gameStore.getQueue().getFront().getElement());
+			cashiers.get(i).setStack(gameStore.getStacks().get(i));
+			cashiers.get(i).start();
+			
+			Platform.runLater(new Thread(){
+				public void run() {
+					numCashier--;
+					numberClients--;
+					money.setText("$"+gameStore.getQueue().getFront().getElement().getPrice());
+					payingLabelNumCashier.setText(numCashier+"");
+					payingNumPeople.setText(numberClients+"");
+				}
+			});
+			gameStore.getQueue().dequeue();
+			gameStore.getStacks().remove(i);
+		}
 	}
 
 	public void loadSelectGame() throws IOException {
@@ -591,7 +644,12 @@ public class GameStoreGUI {
 
 	}
 
-
+	public void createCashiers() {
+		for (int i = 0; i < numCashier; i++) {
+			Cashier cashier = new Cashier();
+			cashiers.add(cashier);
+		}
+	}
 
 	@FXML
 	public void numSimulsContinue(ActionEvent event) throws IOException {
@@ -715,7 +773,10 @@ public class GameStoreGUI {
 		mainPane.setTop(load);
 		Loading pc = new Loading(this,shortProgreesInd);
 		pc.start();
+		gameStore.addQueue();
 	}
+	
+	
 
 	public GameStore getGameStore() {
 		return gameStore;
