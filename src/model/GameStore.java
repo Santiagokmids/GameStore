@@ -15,7 +15,7 @@ public class GameStore {
 	private Client clientsOfInsertion;
 	private Client clientsOfSelection;
 	private ArrayList<Stack<Game>>stacks;
-
+	private ArrayList<Client> finalClients;
 	private ArrayList<Long> times;
 	private Queue<Client> queue;
 
@@ -24,6 +24,7 @@ public class GameStore {
 		stacks = new ArrayList<>();
 		times = new ArrayList<>();
 		queue = new Queue<>();
+		setFinalClients(new ArrayList<>());
 	}
 
 	public void createStand(int numberStand) {
@@ -173,6 +174,7 @@ public class GameStore {
 		for (int i = 0; i < times.size(); i++) {
 			int cont = 0;
 			for (int j = 0; j < times.size(); j++) {
+				System.out.println(times.get(i)+" "+times.get(j));
 				if(times.get(i) < times.get(j)) {
 					cont++;
 				}
@@ -268,5 +270,13 @@ public class GameStore {
 
 	public void setStacks(ArrayList<Stack<Game>> stacks) {
 		this.stacks = stacks;
+	}
+
+	public ArrayList<Client> getfinalClients(){
+		return finalClients;
+	}
+
+	public void setFinalClients(ArrayList<Client> finalClients) {
+		this.finalClients = finalClients;
 	}
 }

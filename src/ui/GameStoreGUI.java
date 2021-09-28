@@ -220,6 +220,9 @@ public class GameStoreGUI {
 
     @FXML
     private ImageView listClientTitle;
+    
+    @FXML
+    private ImageView listClientsPeople;
 
     @FXML
     private TableView<Client> tvClients;
@@ -228,7 +231,7 @@ public class GameStoreGUI {
     private TableColumn<Client, String> listClientsCode;
 
     @FXML
-    private TableColumn<Client, String> listClientsValue;
+    private TableColumn<Client, Integer> listClientsValue;
 
     @FXML
     private TableColumn<Client, String> listClientsCodeGame;
@@ -240,11 +243,11 @@ public class GameStoreGUI {
 	
 	public void inicializateTableViewClients() {
 		
-		listClients = FXCollections.observableArrayList(gameStore.getClient());
+		listClients = FXCollections.observableArrayList(gameStore.getfinalClients());
 		
 		tvClients.setItems(listClients);
 		listClientsCode.setCellValueFactory(new PropertyValueFactory<Client, String>("code"));
-		listClientsValue.setCellValueFactory(new PropertyValueFactory<Client, String>("price"));
+		listClientsValue.setCellValueFactory(new PropertyValueFactory<Client, Integer>("price"));
 		listClientsCodeGame.setCellValueFactory(new PropertyValueFactory<Client, String>("codeGame"));
 	}
 
@@ -276,10 +279,11 @@ public class GameStoreGUI {
 			}
 		});
 		
+		createCashiers();
 		addClientsToCashiers();
 	}
 	
-	public void clientToCashier(Cashier cashier) {
+	public synchronized void clientToCashier(Cashier cashier) throws IOException {
 		
 		if(gameStore.getQueue().isEmpty()) {
 			
@@ -300,17 +304,33 @@ public class GameStoreGUI {
 			gameStore.getQueue().dequeue();
 			
 		}else {
-			
+			listClients();
 		}
 	}
 	
-	public void addClientsToCashiers() {
+	public void listClients() throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("listClients.fxml"));
+		loader.setController(this);
+		Parent load = loader.load();
+		mainPane.getChildren().clear();
+
+		Image image = new Image("/images/background.png");
+		listClientsBackGround.setImage(image);
+		Image image1 = new Image("/images/peopleList.png");
+		listClientTitle.setImage(image1);
+		Image image2 = new Image("/images/orderClients.png");
+		payingCashier.setImage(image2);
+		mainPane.setTop(load);
+
+	}
+	
+	public synchronized void addClientsToCashiers() {
 		
 		for (int i = 0; i < cashiers.size(); i++) {
+			System.out.println("entraaa "+cashiers.size());
 			cashiers.get(i).setClient(gameStore.getQueue().getFront().getElement());
 			cashiers.get(i).setStack(gameStore.getStacks().get(i));
 			cashiers.get(i).start();
-			
 			Platform.runLater(new Thread(){
 				public void run() {
 					numCashier--;
@@ -809,6 +829,7 @@ public class GameStoreGUI {
 		Loading pc = new Loading(this,shortProgreesInd);
 		pc.start();
 		gameStore.addQueue();
+		System.out.println(gameStore.getQueue().isEmpty()+" assassa");
 	}
 	
 	
