@@ -853,4 +853,9 @@ public class GameStoreGUI {
 		gameStore.initializatedSelectionSort();
 		startSimul(event);
 	}
+	
+	@FXML
+    void listClientsFinish(ActionEvent event) {
+
+    }
 }
