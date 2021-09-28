@@ -393,7 +393,7 @@ public class GameStoreGUI {
 					JOptionPane.showMessageDialog(null, "Alguno de los juegos ingresados no existe", "Error",
 							JOptionPane.WARNING_MESSAGE);
 				}else if(idClients > 0){
-					if(gameStore.checkCuantityTheGames(codesGame) == 1) {
+					if(gameStore.checkCuantityTheGames(codesGame) <3) {
 					gameStore.removeCuantityGame(codesGame);
 					gameStore.addClient(txtIdClients.getText());
 
