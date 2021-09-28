@@ -6,13 +6,18 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -209,9 +214,39 @@ public class GameStoreGUI {
 	private int contSimuls;
 
 	private int numCashier;
+	
+	@FXML
+    private ImageView listClientsBackGround;
+
+    @FXML
+    private ImageView listClientTitle;
+
+    @FXML
+    private TableView<Client> tvClients;
+
+    @FXML
+    private TableColumn<Client, String> listClientsCode;
+
+    @FXML
+    private TableColumn<Client, String> listClientsValue;
+
+    @FXML
+    private TableColumn<Client, String> listClientsCodeGame;
+	
+	public static ObservableList<Client> listClients;
 
 	private GameStore gameStore;
 	private ArrayList<Cashier> cashiers;
+	
+	public void inicializateTableViewClients() {
+		
+		listClients = FXCollections.observableArrayList(gameStore.getClient());
+		
+		tvClients.setItems(listClients);
+		listClientsCode.setCellValueFactory(new PropertyValueFactory<Client, String>("code"));
+		listClientsValue.setCellValueFactory(new PropertyValueFactory<Client, String>("price"));
+		listClientsCodeGame.setCellValueFactory(new PropertyValueFactory<Client, String>("codeGame"));
+	}
 
 	public GameStoreGUI() {
 		gameStore = new GameStore();
