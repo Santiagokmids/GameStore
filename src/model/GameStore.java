@@ -9,12 +9,12 @@ import dataStructures.Stack;
 
 public class GameStore {
 
-	public ArrayList<Stand>stands = new ArrayList<>();
-	private ArrayList<Client>client;
-	private ArrayList<Game>clientGames;
+	public ArrayList<Stand> stands = new ArrayList<>();
+	private ArrayList<Client> client;
+	private ArrayList<Game> clientGames;
 	private Client clientsOfInsertion;
 	private Client clientsOfSelection;
-	private ArrayList<Stack<Game>>stacks;
+	private ArrayList<Stack<Game>> stacks;
 	private ArrayList<Client> finalClients;
 	private ArrayList<Long> times;
 	private Queue<Client> queue;
@@ -47,7 +47,7 @@ public class GameStore {
 			}
 			verify = true;
 
-		}catch (NumberFormatException nfe) {
+		} catch (NumberFormatException nfe) {
 		}
 
 		return verify;
@@ -62,26 +62,96 @@ public class GameStore {
 			clientGames = new ArrayList<Game>();
 			for (int i = 0; i < stands.size() && !verify; i++) {
 
-				for (int j = 0; j < games.length ; j++) {
+				for (int j = 0; j < games.length; j++) {
 
 					Game game = stands.get(i).getHash().searchElement(Integer.parseInt(games[j]));
 
-					if(game != null) {
+					if (game != null) {
 						contGamesFinds++;
 						clientGames.add(game);
 					}
 				}
 
-				if(contGamesFinds == games.length) {
+				if (contGamesFinds == games.length) {
 					verify = true;
 
 				}
 			}
 
-		}catch (NumberFormatException nfe) {
+		} catch (NumberFormatException nfe) {
 		}
 
 		return verify;
+	}
+
+	public int checkCuantityTheGames(String txtGames) {
+
+		int verify = 0;
+		String[] games = txtGames.split(";");
+		try {
+			clientGames = new ArrayList<Game>();
+			for (int i = 0; i < stands.size(); i++) {
+
+				for (int j = 0; j < games.length; j++) {
+
+					Game game = stands.get(i).getHash().searchElement(Integer.parseInt(games[j]));
+
+					if (game != null) {
+						if (game.getCuantity() >= 1) {
+							clientGames.add(game);
+							verify++;
+						}
+					}
+				}
+
+			}
+
+		} catch (NumberFormatException nfe) {
+		}
+		if (verify >= games.length) {
+			verify = 1;
+		} else if (verify < games.length && verify >= 1) {
+			verify = 2;
+		} else {
+			verify = 3;
+		}
+		return verify;
+	}
+
+	public void removeCuantityGame(String txtGames) {
+
+		boolean verify = false;
+		String[] games = txtGames.split(";");
+		int contGamesFinds = 0;
+		try {
+			clientGames = new ArrayList<Game>();
+			for (int i = 0; i < stands.size() && !verify; i++) {
+
+				for (int j = 0; j < games.length; j++) {
+
+					Game game = stands.get(i).getHash().searchElement(Integer.parseInt(games[j]));
+
+					if (game != null) {
+						if (game.getCuantity() > 0) {
+							contGamesFinds++;
+							clientGames.add(game);
+							int newCuanity = stands.get(i).getHash().searchElement(Integer.parseInt(games[j]))
+									.getCuantity();
+							stands.get(i).getHash().searchElement(Integer.parseInt(games[j]))
+									.setCuantity(newCuanity - 1);
+						}
+					}
+				}
+
+				if (contGamesFinds == games.length) {
+					verify = true;
+
+				}
+			}
+
+		} catch (NumberFormatException nfe) {
+		}
+
 	}
 
 	public void changeInformation(String name, Integer numGame, int index) {
@@ -95,13 +165,14 @@ public class GameStore {
 
 	public void insertionSort(Client clients) {
 
-		for(int i = 1; i < clients.getCodeGame().size();i++) {
+		for (int i = 1; i < clients.getCodeGame().size(); i++) {
 
-			for(int j= i; j > 0 && clients.getCodeGame().get(j-1).getStand().compareTo(clients.getCodeGame().get(j).getStand()) > 0;j--) {
+			for (int j = i; j > 0 && clients.getCodeGame().get(j - 1).getStand()
+					.compareTo(clients.getCodeGame().get(j).getStand()) > 0; j--) {
 
 				Game tem = clients.getCodeGame().get(j);
-				clients.getCodeGame().set(j, clients.getCodeGame().get(j-1));
-				clients.getCodeGame().set(j-1,tem);
+				clients.getCodeGame().set(j, clients.getCodeGame().get(j - 1));
+				clients.getCodeGame().set(j - 1, tem);
 			}
 		}
 		clientsOfInsertion = clients;
@@ -111,14 +182,14 @@ public class GameStore {
 
 		Stack<Game> stack = new Stack<>();
 
-		for(int i = 0; i < clientsOfInsertion.getCodeGame().size();i++) {
+		for (int i = 0; i < clientsOfInsertion.getCodeGame().size(); i++) {
 			stack.push(clientsOfInsertion.getCodeGame().get(i));
 		}
-		stacks.add(stack);	
+		stacks.add(stack);
 	}
 
-	public void getListOfClient(){
-		for(int i = 0; i < client.size();i++) {
+	public void getListOfClient() {
+		for (int i = 0; i < client.size(); i++) {
 			long start = System.currentTimeMillis();
 			insertionSort(client.get(i));
 			addStackInsertion();
@@ -148,12 +219,12 @@ public class GameStore {
 		Client newClient = objClient;
 		ArrayList<Game> newArray = objClient.getCodeGame();
 
-		for(int i = 0 ; i < newArray.size(); i++) {
+		for (int i = 0; i < newArray.size(); i++) {
 
 			Game min = newArray.get(i);
 
-			for(int j = i+1; j < newArray.size(); j++) {
-				if(newArray.get(j).getStand().compareTo(min.getStand()) < 0) {
+			for (int j = i + 1; j < newArray.size(); j++) {
+				if (newArray.get(j).getStand().compareTo(min.getStand()) < 0) {
 					Game temp = newArray.get(j);
 					newArray.remove(j);
 					newArray.add(j, min);
@@ -164,22 +235,22 @@ public class GameStore {
 			newArray.add(i, min);
 		}
 		newClient.setCodeGame(newArray);
-		
+
 		clientsOfSelection = newClient;
 	}
-	
+
 	public void addQueue() {
 		int contQueue = 0;
-				
+
 		for (int i = 0; i < times.size(); i++) {
 			int cont = 0;
 			for (int j = 0; j < times.size(); j++) {
-				System.out.println(times.get(i)+" "+times.get(j));
-				if(times.get(i) < times.get(j)) {
+				System.out.println(times.get(i) + " " + times.get(j));
+				if (times.get(i) < times.get(j)) {
 					cont++;
 				}
 			}
-			if(cont == times.size()) {
+			if (cont == times.size()) {
 				times.remove(i);
 				queue.enqueue(new QueueNode<Client>(client.get(i)));
 				stacks.set(contQueue, stacks.get(i));
@@ -192,31 +263,31 @@ public class GameStore {
 
 		Stack<Game> stack = new Stack<>();
 
-		for(int i = 0; i < clientsOfSelection.getCodeGame().size();i++) {
+		for (int i = 0; i < clientsOfSelection.getCodeGame().size(); i++) {
 			stack.push(clientsOfSelection.getCodeGame().get(i));
 		}
-		stacks.add(stack);	
+		stacks.add(stack);
 	}
-	
+
 	public Long calculateTimeInsertion() {
 		Long total = (long) 0;
 		String letter = "";
 		for (int i = 0; i < clientsOfInsertion.getCodeGame().size(); i++) {
-			
-			if(!letter.equalsIgnoreCase(clientsOfInsertion.getCodeGame().get(i).getStand())) {
+
+			if (!letter.equalsIgnoreCase(clientsOfInsertion.getCodeGame().get(i).getStand())) {
 				letter = clientsOfInsertion.getCodeGame().get(i).getStand();
 				total += 10;
 			}
 		}
 		return total;
 	}
-	
+
 	public Long calculateTimeSelection() {
 		Long total = (long) 0;
 		String letter = "";
 		for (int i = 0; i < clientsOfSelection.getCodeGame().size(); i++) {
-			
-			if(!letter.equalsIgnoreCase(clientsOfSelection.getCodeGame().get(i).getStand())) {
+
+			if (!letter.equalsIgnoreCase(clientsOfSelection.getCodeGame().get(i).getStand())) {
 				letter = clientsOfSelection.getCodeGame().get(i).getStand();
 				total += 10;
 			}
@@ -232,7 +303,7 @@ public class GameStore {
 		this.stands = stands;
 	}
 
-	public void addStand(String name,ArrayList<Game>games) {
+	public void addStand(String name, ArrayList<Game> games) {
 
 	}
 
@@ -247,15 +318,15 @@ public class GameStore {
 	public boolean searchGame(int codeGame) {
 		boolean find = false;
 
-		for(int i = 0;i < stands.size();i++) {
+		for (int i = 0; i < stands.size(); i++) {
 			Game game = stands.get(i).getHash().searchElement(codeGame);
-			if(game != null) {
+			if (game != null) {
 				find = true;
 			}
 		}
 		return find;
 	}
-	
+
 	public Queue<Client> getQueue() {
 		return queue;
 	}
@@ -263,7 +334,7 @@ public class GameStore {
 	public void setQueue(Queue<Client> queue) {
 		this.queue = queue;
 	}
-	
+
 	public ArrayList<Stack<Game>> getStacks() {
 		return stacks;
 	}
@@ -272,7 +343,7 @@ public class GameStore {
 		this.stacks = stacks;
 	}
 
-	public ArrayList<Client> getfinalClients(){
+	public ArrayList<Client> getfinalClients() {
 		return finalClients;
 	}
 

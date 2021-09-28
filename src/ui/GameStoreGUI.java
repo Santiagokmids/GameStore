@@ -383,7 +383,7 @@ public class GameStoreGUI {
 
 				idClients = Integer.parseInt(txtIdClients.getText());
 
-				boolean verify = gameStore.verifyGames(codesGame);	
+				boolean verify = gameStore.verifyGames(codesGame);	// revisar que sean enteros
 				boolean verifyGames = gameStore.checkTheGames(codesGame);
 
 				if(!verify) {
@@ -393,7 +393,8 @@ public class GameStoreGUI {
 					JOptionPane.showMessageDialog(null, "Alguno de los juegos ingresados no existe", "Error",
 							JOptionPane.WARNING_MESSAGE);
 				}else if(idClients > 0){
-
+					if(gameStore.checkCuantityTheGames(codesGame) == 1) {
+					gameStore.removeCuantityGame(codesGame);
 					gameStore.addClient(txtIdClients.getText());
 
 					if(contClients < numberClients) {
@@ -410,6 +411,11 @@ public class GameStoreGUI {
 						enter = true;
 						loadApp();
 					}
+					}else {
+						JOptionPane.showMessageDialog(null, "uno o varios de los juegos deseados se agotaron", "Error",
+								JOptionPane.WARNING_MESSAGE);
+					}
+					
 				} else {
 					JOptionPane.showMessageDialog(null, "La cédula o código del cliente es inválida", "Error",
 							JOptionPane.WARNING_MESSAGE);
