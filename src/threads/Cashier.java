@@ -1,14 +1,18 @@
 package threads;
 
+import java.io.IOException;
+
 import dataStructures.Stack;
 import model.Client;
 import model.Game;
+import model.GameStore;
 import ui.GameStoreGUI;
 
 public class Cashier extends Thread {
 
 	private Client client;
 	private Stack<Game> stack;
+	private GameStore gameStore;
 	private GameStoreGUI gameStoreGUI;
 
 	public Cashier() {
@@ -26,6 +30,7 @@ public class Cashier extends Thread {
 	}
 	
 	public void run() {
+		System.out.println("entraaa al hilo");
 		int numGames = client.getCodeGame().size();
 		
 		for (int j = 0; j < client.getCodeGame().size(); j++) {
@@ -38,9 +43,10 @@ public class Cashier extends Thread {
 				
 			}else {
 				Thread.sleep(150*numGames);
+				gameStore.getfinalClients().add(client);
 				gameStoreGUI.clientToCashier(this);
 			}
-		}catch(InterruptedException e) {
+		}catch(InterruptedException | IOException e) {
 
 		}
 	}
