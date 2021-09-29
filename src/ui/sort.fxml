@@ -10,7 +10,7 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="714.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="shortBackground" fitHeight="450.0" fitWidth="714.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="shortTitle" fitHeight="420.0" fitWidth="756.0" layoutX="-16.0" layoutY="-104.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="shortTitle" fitHeight="420.0" fitWidth="756.0" layoutX="-29.0" layoutY="-129.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="shortMen" fitHeight="202.0" fitWidth="239.0" layoutX="132.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="shortWoman" fitHeight="256.0" fitWidth="230.0" layoutX="344.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true" />
       <Label layoutX="24.0" layoutY="348.0" text="Se están ordenando las listas de juegos de cada cliente de acuerdo a las estanterías...">

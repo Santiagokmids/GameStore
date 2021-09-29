@@ -1,24 +1,21 @@
 package threads;
 
-import java.io.IOException;
-
 import dataStructures.Stack;
+import javafx.application.Platform;
 import model.Client;
 import model.Game;
-import model.GameStore;
 import ui.GameStoreGUI;
 
 public class Cashier extends Thread {
 
 	private Client client;
 	private Stack<Game> stack;
-	private GameStore gameStore;
-	private GameStoreGUI gameStoreGUI;
+	private GameStoreGUI gameStore;
 
-	public Cashier() {
+	public Cashier(GameStoreGUI gameStore) {
 		setClient(null);
 		stack = new Stack<>();
-		gameStoreGUI = new GameStoreGUI();
+		this.gameStore = gameStore;
 	}
 
 	public Client getClient() {
@@ -28,26 +25,39 @@ public class Cashier extends Thread {
 	public void setClient(Client client) {
 		this.client = client;
 	}
-	
+
 	public void run() {
-		System.out.println("entraaa al hilo");
+
 		int numGames = client.getCodeGame().size();
-		
+
 		for (int j = 0; j < client.getCodeGame().size(); j++) {
 			client.getCodeGame().remove(j);
+			client.getCodeGame().add(stack.top().getElement());
 		}
-		
-		try{
-			if(7 < numGames) {
-				Thread.sleep(800);
-				
-			}else {
-				Thread.sleep(150*numGames);
-				gameStore.getfinalClients().add(client);
-				gameStoreGUI.clientToCashier(this);
-			}
-		}catch(InterruptedException | IOException e) {
 
+		if(7 < numGames) {
+
+			Platform.runLater(() -> { // Para cambiar algo grafico-- desde un hilo alternativo
+				try {
+					Thread.sleep(800);
+					gameStore.getFinalClients().add(client);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}	//setprogre para el avance	
+			});
+
+		}else {
+			
+			Platform.runLater(() -> { // Para cambiar algo grafico-- desde un hilo alternativo
+				try {
+					Thread.sleep(150*numGames);
+					gameStore.getFinalClients().add(client);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}	//setprogre para el avance	
+			});
 		}
 	}
 

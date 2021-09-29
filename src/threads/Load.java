@@ -10,6 +10,7 @@ public class Load extends Thread{
 	private ProgressIndicator prgres1;
 	private double porcentaje;
 	private GameStoreGUI gameStore;
+	
 	public Load(GameStoreGUI gameStoreGUI,ProgressIndicator pg) {
 		prgres1=pg;
 		porcentaje = 0;
@@ -29,7 +30,7 @@ public class Load extends Thread{
 		Platform.runLater(() -> { // Para cambiar algo grafico-- desde un hilo alternativo
 			try {
 				gameStore.payingGame();
-			} catch (IOException e) {
+			} catch (IOException | InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}	//setprogre para el avance	

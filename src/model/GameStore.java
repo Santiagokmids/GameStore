@@ -190,10 +190,10 @@ public class GameStore {
 
 	public void getListOfClient() {
 		for (int i = 0; i < client.size(); i++) {
-			long start = System.currentTimeMillis();
+			long start = System.nanoTime();
 			insertionSort(client.get(i));
 			addStackInsertion();
-			long end = System.currentTimeMillis();
+			long end = System.nanoTime();
 			Long total = end - start;
 			total += calculateTimeInsertion();
 			times.add(total);
@@ -241,20 +241,29 @@ public class GameStore {
 
 	public void addQueue() {
 		int contQueue = 0;
-
-		for (int i = 0; i < times.size(); i++) {
-			int cont = 0;
-			for (int j = 0; j < times.size(); j++) {
-				System.out.println(times.get(i) + " " + times.get(j));
-				if (times.get(i) < times.get(j)) {
-					cont++;
+		
+		if(times.size() == 1) {
+			times.remove(0);
+			queue.enqueue(new QueueNode<Client>(client.get(0)));
+			stacks.set(contQueue, stacks.get(0));
+			
+		}else {
+			for (int i = 0; i < times.size(); i++) {
+				int cont = 1;
+				for (int j = 0; j < times.size(); j++) {
+					if (times.get(i) > times.get(j)) {
+						cont++;
+					}
 				}
-			}
-			if (cont == times.size()) {
-				times.remove(i);
-				queue.enqueue(new QueueNode<Client>(client.get(i)));
-				stacks.set(contQueue, stacks.get(i));
-				contQueue++;
+				if (cont == times.size() && client != null) {
+					queue.enqueue(new QueueNode<Client>(client.get(i)));
+					stacks.set(contQueue, stacks.get(i));
+					contQueue++;
+					
+				} else if(i == times.size()-1 && client != null) {
+					queue.enqueue(new QueueNode<Client>(client.get(i)));
+					stacks.set(contQueue, stacks.get(i));
+				}
 			}
 		}
 	}
@@ -262,7 +271,7 @@ public class GameStore {
 	public void addStackSelection() {
 
 		Stack<Game> stack = new Stack<>();
-
+		
 		for (int i = 0; i < clientsOfSelection.getCodeGame().size(); i++) {
 			stack.push(clientsOfSelection.getCodeGame().get(i));
 		}
@@ -271,11 +280,10 @@ public class GameStore {
 
 	public Long calculateTimeInsertion() {
 		Long total = (long) 0;
-		String letter = "";
+		String letter = "A";
 		for (int i = 0; i < clientsOfInsertion.getCodeGame().size(); i++) {
-
-			if (!letter.equalsIgnoreCase(clientsOfInsertion.getCodeGame().get(i).getStand())) {
-				letter = clientsOfInsertion.getCodeGame().get(i).getStand();
+			
+			if (letter.compareTo(clientsOfInsertion.getCodeGame().get(i).getStand().toUpperCase()) > 0) {
 				total += 10;
 			}
 		}
@@ -284,11 +292,10 @@ public class GameStore {
 
 	public Long calculateTimeSelection() {
 		Long total = (long) 0;
-		String letter = "";
+		String letter = "A";
 		for (int i = 0; i < clientsOfSelection.getCodeGame().size(); i++) {
 
-			if (!letter.equalsIgnoreCase(clientsOfSelection.getCodeGame().get(i).getStand())) {
-				letter = clientsOfSelection.getCodeGame().get(i).getStand();
+			if (letter.compareTo(clientsOfSelection.getCodeGame().get(i).getStand().toUpperCase()) > 0) {
 				total += 10;
 			}
 		}
@@ -350,4 +357,5 @@ public class GameStore {
 	public void setFinalClients(ArrayList<Client> finalClients) {
 		this.finalClients = finalClients;
 	}
+	
 }
