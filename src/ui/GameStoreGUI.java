@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableColumn;
@@ -161,6 +162,8 @@ public class GameStoreGUI {
 
 	private int contClients;
 
+	private Client auxClient;
+
 	@FXML
 	private ImageView selectGameBackground;
 
@@ -178,6 +181,9 @@ public class GameStoreGUI {
 
 	@FXML
 	private ImageView selectGameStandRigth;
+
+	@FXML
+	private ImageView peopleList;
 
 	@FXML
 	private ProgressIndicator selectGamesProgress;
@@ -204,6 +210,9 @@ public class GameStoreGUI {
 	private Label payingNumPeople;
 
 	@FXML
+	private Button lastButton;
+
+	@FXML
 	private Label money;
 
 	@FXML
@@ -214,49 +223,57 @@ public class GameStoreGUI {
 	private int contSimuls;
 
 	private int numCashier;
-	
+
 	@FXML
-    private ImageView listClientsBackGround;
+	private ImageView listClientsBackGround;
 
-    @FXML
-    private ImageView listClientTitle;
-    
-    @FXML
-    private ImageView listClientsPeople;
+	@FXML
+	private ImageView listClientTitle;
 
-    @FXML
-    private TableView<Client> tvClients;
+	@FXML
+	private ImageView listClientsPeople;
 
-    @FXML
-    private TableColumn<Client, String> listClientsCode;
+	@FXML
+	private TableView<Client> tvClients;
 
-    @FXML
-    private TableColumn<Client, Integer> listClientsValue;
+	@FXML
+	private TableColumn<Client, String> listClientsCode;
 
-    @FXML
-    private TableColumn<Client, String> listClientsCodeGame;
+	@FXML
+	private TableColumn<Client, Integer> listClientsValue;
+
+	@FXML
+	private TableColumn<Client, String> listClientsCodeGame;
 	
+	private ArrayList<Client> finalClients;
+
 	public static ObservableList<Client> listClients;
 
 	private GameStore gameStore;
 	private ArrayList<Cashier> cashiers;
-	
+
 	public void inicializateTableViewClients() {
-		
-		listClients = FXCollections.observableArrayList(gameStore.getfinalClients());
-		
+
+		listClients = FXCollections.observableArrayList(getFinalClients());
+
 		tvClients.setItems(listClients);
 		listClientsCode.setCellValueFactory(new PropertyValueFactory<Client, String>("code"));
 		listClientsValue.setCellValueFactory(new PropertyValueFactory<Client, Integer>("price"));
-		listClientsCodeGame.setCellValueFactory(new PropertyValueFactory<Client, String>("codeGame"));
+		listClientsCodeGame.setCellValueFactory(new PropertyValueFactory<Client, String>("codeGames"));
 	}
 
 	public GameStoreGUI() {
 		gameStore = new GameStore();
+		finalClients = new ArrayList<>();
 		cashiers = new ArrayList<>();
 	}
+	
+	public void initClass() {
+		gameStore = new GameStore();
+	}
 
-	public void payingGame() throws IOException {
+	public void payingGame() throws IOException, InterruptedException {
+		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("paying.fxml"));
 		loader.setController(this);
 		Parent load = loader.load();
@@ -271,7 +288,7 @@ public class GameStoreGUI {
 		Image image3 = new Image("/images/queue.png");
 		payingQueue.setImage(image3);
 		mainPane.setTop(load);
-
+		
 		Platform.runLater(new Thread(){
 			public void run() {
 				payingLabelNumCashier.setText(numCashier+"");
@@ -280,34 +297,32 @@ public class GameStoreGUI {
 		});
 		
 		createCashiers();
-		addClientsToCashiers();
 	}
-	
-	public synchronized void clientToCashier(Cashier cashier) throws IOException {
+
+	public synchronized void clientToCashier(Cashier cashier) throws IOException, InterruptedException {
 		
-		if(gameStore.getQueue().isEmpty()) {
-			
+		if(!gameStore.getQueue().isEmpty() && gameStore.getQueue().getFront().getElement() != null) {
 			cashier.setClient(gameStore.getQueue().getFront().getElement());
 			cashier.setStack(gameStore.getStacks().get(0));
+			auxClient = gameStore.getQueue().getFront().getElement();
+			gameStore.getQueue().dequeue();
+			gameStore.getStacks().remove(0);
 			cashier.start();
-			
+			numCashier--;
+			numberClients--;
 			Platform.runLater(new Thread(){
 				public void run() {
-					numCashier--;
-					numberClients--;
-					money.setText("$"+gameStore.getQueue().getFront().getElement().getPrice());
+					money.setText("$"+auxClient.getPrice());
 					payingLabelNumCashier.setText(numCashier+"");
 					payingNumPeople.setText(numberClients+"");
 				}
 			});
-			gameStore.getStacks().remove(0);
-			gameStore.getQueue().dequeue();
-			
-		}else {
+
+		}else if(gameStore.getQueue().isEmpty()){
 			listClients();
 		}
 	}
-	
+
 	public void listClients() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("listClients.fxml"));
 		loader.setController(this);
@@ -316,32 +331,57 @@ public class GameStoreGUI {
 
 		Image image = new Image("/images/background.png");
 		listClientsBackGround.setImage(image);
-		Image image1 = new Image("/images/peopleList.png");
+		Image image1 = new Image("/images/orderClients.png");
 		listClientTitle.setImage(image1);
-		Image image2 = new Image("/images/orderClients.png");
-		payingCashier.setImage(image2);
+		Image image2 = new Image("/images/peopleList.png");
+		peopleList.setImage(image2);
 		mainPane.setTop(load);
-
+		if(contSimuls > 1) {
+			lastButton.setText("Iniciar con la nueva simulación");
+		}else {
+			lastButton.setText("Terminar simulación");
+		}
+		inicializateTableViewClients();
 	}
-	
-	public synchronized void addClientsToCashiers() {
-		
-		for (int i = 0; i < cashiers.size(); i++) {
-			System.out.println("entraaa "+cashiers.size());
-			cashiers.get(i).setClient(gameStore.getQueue().getFront().getElement());
-			cashiers.get(i).setStack(gameStore.getStacks().get(i));
-			cashiers.get(i).start();
+
+	public synchronized void addClientsToCashiers() throws InterruptedException, IOException {
+		int num = numberClients;
+
+		for (int i = 0; i < cashiers.size() && i < num; i++) {
+
+			if(gameStore.getQueue().getFront() != null && i < gameStore.getStacks().size()) {
+				cashiers.get(i).setClient(gameStore.getQueue().getFront().getElement());
+				auxClient = gameStore.getQueue().getFront().getElement();
+				cashiers.get(i).setStack(gameStore.getStacks().get(i));
+				gameStore.getQueue().dequeue();
+				gameStore.getStacks().remove(i);
+				cashiers.get(i).start();
+				numCashier--;
+				numberClients--;
+			}
 			Platform.runLater(new Thread(){
 				public void run() {
-					numCashier--;
-					numberClients--;
-					money.setText("$"+gameStore.getQueue().getFront().getElement().getPrice());
+					money.setText("$"+auxClient.getPrice());
 					payingLabelNumCashier.setText(numCashier+"");
 					payingNumPeople.setText(numberClients+"");
 				}
 			});
-			gameStore.getQueue().dequeue();
-			gameStore.getStacks().remove(i);
+		}
+		recursiveThread();
+	}
+
+	public void recursiveThread() throws IOException, InterruptedException {
+
+		if(numberClients == 0) {
+			listClients();
+
+		}else {
+			for (int i = 0; i < cashiers.size(); i++) {
+				if(!cashiers.get(i).isAlive()) {
+					clientToCashier(cashiers.get(i));
+				}
+			}
+			recursiveThread();
 		}
 	}
 
@@ -394,28 +434,28 @@ public class GameStoreGUI {
 							JOptionPane.WARNING_MESSAGE);
 				}else if(idClients > 0){
 					if(gameStore.checkCuantityTheGames(codesGame) <3) {
-					gameStore.removeCuantityGame(codesGame);
-					gameStore.addClient(txtIdClients.getText());
+						gameStore.removeCuantityGame(codesGame);
+						gameStore.addClient(txtIdClients.getText());
 
-					if(contClients < numberClients) {
-						contClients++;
-						Platform.runLater(new Thread(){
-							public void run() {
-								datesClientsNum.setText(contClients+"");
-							}
-						});
-						txtIdClients.setText("");
-						txtCodesGamesClients.setText("");
-					}
-					else {
-						enter = true;
-						loadApp();
-					}
+						if(contClients < numberClients) {
+							contClients++;
+							Platform.runLater(new Thread(){
+								public void run() {
+									datesClientsNum.setText(contClients+"");
+								}
+							});
+							txtIdClients.setText("");
+							txtCodesGamesClients.setText("");
+						}
+						else {
+							enter = true;
+							loadApp();
+						}
 					}else {
 						JOptionPane.showMessageDialog(null, "uno o varios de los juegos deseados se agotaron", "Error",
 								JOptionPane.WARNING_MESSAGE);
 					}
-					
+
 				} else {
 					JOptionPane.showMessageDialog(null, "La cédula o código del cliente es inválida", "Error",
 							JOptionPane.WARNING_MESSAGE);
@@ -705,16 +745,18 @@ public class GameStoreGUI {
 
 	}
 
-	public void createCashiers() {
+	public void createCashiers() throws InterruptedException, IOException {
 		for (int i = 0; i < numCashier; i++) {
-			Cashier cashier = new Cashier();
+			Cashier cashier = new Cashier(this);
 			cashiers.add(cashier);
 		}
+		addClientsToCashiers();
 	}
 
 	@FXML
 	public void numSimulsContinue(ActionEvent event) throws IOException {
 		int numSimul =0;
+		contGames = 0;
 		if (numSimulsNum.getText().equals("") ) {
 
 			JOptionPane.showMessageDialog(null, "Debe llenar los datos solicitados", "Error",
@@ -835,10 +877,7 @@ public class GameStoreGUI {
 		Loading pc = new Loading(this,shortProgreesInd);
 		pc.start();
 		gameStore.addQueue();
-		System.out.println(gameStore.getQueue().isEmpty()+" assassa");
 	}
-	
-	
 
 	public GameStore getGameStore() {
 		return gameStore;
@@ -853,15 +892,31 @@ public class GameStoreGUI {
 		gameStore.getListOfClient();
 		startSimul(event);
 	}
-	
+
 	@FXML
 	void selectionBotton(ActionEvent event) throws IOException {
 		gameStore.initializatedSelectionSort();
 		startSimul(event);
 	}
-	
-	@FXML
-    void listClientsFinish(ActionEvent event) {
 
-    }
+	@FXML
+	public void listClientsFinish(ActionEvent event) throws IOException {
+		if(contSimuls > 1) {
+			contSimuls--;
+			initClass();
+			cashiers.clear();
+			numSimulsContinue(event);
+			
+		}else {
+			System.exit(0);
+		}
+	}
+
+	public ArrayList<Client> getFinalClients() {
+		return finalClients;
+	}
+
+	public void setFinalClients(ArrayList<Client> finalClients) {
+		this.finalClients = finalClients;
+	}
 }

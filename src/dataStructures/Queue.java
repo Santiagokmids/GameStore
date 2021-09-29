@@ -27,6 +27,7 @@ public class Queue<E> implements IElementsOfStore{
 		}else {
 			verify = true;
 			front = null;
+			back = null;
 		}
 		return verify;
 	}
@@ -37,6 +38,7 @@ public class Queue<E> implements IElementsOfStore{
 		
 		if(front == null) {
 			front = element;
+			back = element;
 		}else {
 			verify = enqueueRecursive(front, element);	
 		}

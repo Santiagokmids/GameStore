@@ -3,14 +3,14 @@ package model;
 import java.util.ArrayList;
 
 public class Client {
-	
+
 	private String code;
 	private ArrayList<Game> codeGame;
 	private int price;
-	
+
 	public Client(String code, ArrayList<Game> codeGame) {
 		this.code = code;
-		this.setCodeGame(codeGame);
+		this.codeGame = codeGame;
 		setPrice(0);
 	}
 
@@ -26,10 +26,19 @@ public class Client {
 		return codeGame;
 	}
 
+	public String getCodeGames() {
+		String codeGame = "";
+		
+		for (int i = 0; i < this.codeGame.size(); i++) {
+			codeGame += getCodeGame().get(i).getCode()+"\n"; 
+		}
+		return codeGame;
+	}
+
 	public void setCodeGame(ArrayList<Game> codeGame) {
 		this.codeGame = codeGame;
 	}
-	
+
 	public void calculatePrice() {
 		for (int i = 0; i < codeGame.size(); i++) {
 			price += codeGame.get(i).getPrice();
